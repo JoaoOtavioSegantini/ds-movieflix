@@ -14,7 +14,7 @@ export const Modal = ({ close }: Props) => {
         <header>Erro de validação</header>
         <strong>
           <ExclamationTriangle
-            style={{ paddingRight: '5px', width: '1.25rem' }}
+            style={{ paddingRight: '15px', width: '3rem' }}
             data-testid="exclamation-icon"
           />
           Ação não permitida!
