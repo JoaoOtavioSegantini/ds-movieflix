@@ -1,0 +1,101 @@
+{
+  "name": "front-web-movieflix",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bootstrap": "^5.1.3",
+    "immutable": "^4.0.0-rc.14",
+    "jwt-decode": "^3.1.2",
+    "qs": "^6.10.2",
+    "react": "^17.0.2",
+    "react-content-loader": "^6.0.3",
+    "react-dom": "^17.0.2",
+    "react-hook-form": "^7.11.1",
+    "react-paginate": "^7.1.3",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "react-select": "^4.3.1",
+    "react-select-event": "^5.3.0",
+    "react-toastify": "^8.1.0",
+    "resize-observer-polyfill": "^1.5.1",
+    "sass": "^1.45.2",
+    "web-vitals": "^1.0.1"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "cy:coverage": "react-app-rewired -r @cypress/instrument-cra start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "test:e2e": "start-server-and-test start 3000 cy:open",
+    "test:e2e:coverage": "start-server-and-test cy:coverage 3000 cy:open",
+    "test:e2e:ci": "start-server-and-test start 3000 cy:run",
+    "watch": "yarn test --watch",
+    "coverage": "react-app-rewired test --watchAll=false --coverage",
+    "eject": "react-app-rewired eject",
+    "lint": "eslint src --max-warnings=0",
+    "typecheck": "tsc --project tsconfig.json --noEmit"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@cypress/code-coverage": "^3.9.12",
+    "@cypress/instrument-cra": "^1.4.0",
+    "@jackfranklin/test-data-bot": "^1.4.0",
+    "@testing-library/cypress": "^8.0.2",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.15",
+    "@types/jwt-decode": "^3.1.0",
+    "@types/node": "^12.0.0",
+    "@types/qs": "^6.9.7",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
+    "@types/react-paginate": "^7.1.1",
+    "@types/react-router-dom": "^5.3.2",
+    "@types/react-select": "^4.0.17",
+    "@typescript-eslint/eslint-plugin": "^4.28.3",
+    "@typescript-eslint/parser": "^4.28.3",
+    "cypress": "^8.4.0",
+    "eslint": "^7.31.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-cypress": "^2.12.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "msw": "^0.35.0",
+    "prettier": "^2.5.1",
+    "react-app-rewired": "^2.1.11",
+    "start-server-and-test": "^1.14.0",
+    "typescript": "^4.5.4"
+  },
+  "./*": "./*",
+  "jest": {
+    "moduleNameMapper": {
+      "^@type(.*)$": "<rootDir>/src/core/types$1",
+      "^@components(.*)$": "<rootDir>/src/core/components$1",
+      "^@images(.*)$": "<rootDir>/src/core/assets/images$1",
+      "^@utils(.*)$": "<rootDir>/src/core/utils$1",
+      "^@mock(.*)$": "<rootDir>/jest$1"
+    }
+  }
+}

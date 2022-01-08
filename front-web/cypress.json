@@ -1,0 +1,10 @@
+{
+  "video": false,
+  "integrationFolder": "cypress/e2e",
+  "baseUrl": "http://localhost:3000",
+  "requestTimeout": 500000,
+  "responseTimeout": 3000000,
+  "projectId": "xpmma3",
+  "chromeWebSecurity": false
+
+}

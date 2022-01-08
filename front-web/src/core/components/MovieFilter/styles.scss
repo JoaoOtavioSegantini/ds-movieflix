@@ -1,0 +1,59 @@
+.filter-container {
+  width: 100%;
+  margin-bottom: 10px;
+ }
+.movie-filters-container {
+  margin-left: 50px;
+  margin-top: 50px;
+  width: 210px;
+  background-color: var(--card-background);
+  color: var(--pure-white);
+
+  .movie-genres-select__control {
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background-color: var(--card-background);
+    margin-left: -30px;
+    height: 50px;
+    top: 5px;
+    width: 253px;
+  }
+  .movie-genres-select__control--is-focused,
+  .movie-genres-select__control--menu-is-open {
+    box-shadow: 0 0 1pt 1pt var(--primary-color);
+
+  }
+  .movie-genres-select__indicator-separator {
+    display: none;
+  }
+  .movie-genres-select__menu {
+    background-color: var(--card-background);
+    width: 250px;
+    margin-left: -30px;
+    margin-top: 12px;
+
+  }
+
+  .movie-genres-select__option {
+    background-color: var(--card-background);
+
+  }
+  .movie-genres-select__option:hover {
+    background-color: var(--card-background);
+    color: var(--primary-color);
+  }
+  .movie-genres-select__placeholder {
+    color: var(--pure-white);
+  }
+
+  .movie-genres-select__indicator {
+    color: var(--grey);
+    background-color: var(--card-background);
+    &:hover {
+      color: var(--pure-white);
+    }
+  }
+  .movie-genres-select__single-value {
+    color: var(--pure-white);
+  }
+}

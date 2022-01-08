@@ -1,0 +1,230 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MovieDetails /> should don't render disable save review when user is a member 1`] = `
+<div
+  class="movie-details-container"
+>
+  <div
+    class="movie-details d-flex card-base"
+  >
+    <div
+      class="movie-main-image"
+    >
+      <img
+        height="320"
+        src="https://www.themoviedb.org/t/p/w533_and_h300_bestv2/5fRAAO13URmteku8mb39V9YPJBb.jpg"
+        width="526"
+      />
+    </div>
+    <div
+      class="movie-main-details"
+    >
+      <div
+        class="card-title-detail"
+        data-testid="movie-title"
+      >
+        <span>
+          Loki
+        </span>
+      </div>
+      <div
+        class="card-year-detail"
+      >
+        <span>
+          2021
+        </span>
+      </div>
+      <div
+        class="card-synopsis-detail"
+      >
+        <span>
+          O vilão Loki reempreende seu papel como o Deus do Mal....
+        </span>
+      </div>
+      <div
+        class="card-description border-radius-20"
+      >
+        <blockquote>
+          <input
+            class="more-information"
+            data-testid="view-more"
+            id="movie-1"
+            type="checkbox"
+          />
+          <p
+            class="description"
+          >
+            Loki é uma série estadunidense criada por Michael Waldron para o Disney+, baseada no personagem de mesmo nome da Marvel Comics. É ambientada no Universo Cinematográfico Marvel (UCM), compartilhando continuidade com os filmes da franquia. A série se passa após os eventos do filme Vingadores: Ultimato (2019), no qual uma versão alternativa de Loki cria uma nova linha do tempo. Loki é produzida pelo Marvel Studios, com Waldron atuando como roteirista principal e Kate Herron dirigindo a primeira temporada.Tom Hiddleston repete seu papel como Loki da série de filmes, com Gugu Mbatha-Raw, Wunmi Mosaku, Eugene Cordero, Tara Strong, Owen Wilson, Sophia Di Martino, Sasha Lane, Jack Veal, DeObia Oparei, Richard E. Grant e Jonathan Majors também estrelando. Em setembro de 2018, o Marvel Studios estava desenvolvendo uma série de séries limitadas para o Disney+, centradas em personagens coadjuvantes dos filmes do UCM.Depois de roubar o Tesseract durante os eventos de Vingadores: Ultimato, uma versão alternativa de Loki é trazida para a misteriosa Autoridade de Variância Temporal (AVT), uma organização burocrática que existe fora do tempo e do espaço, e monitora a linha do tempo. Eles dão a Loki uma escolha: ser apagado da existência por ser uma "variante do tempo" ou ajudar a consertar a linha do tempo e impedir uma ameaça maior. Loki acaba preso em seu próprio thriller policial, viajando no tempo e alterando a história da humanidade.
+          </p>
+          <label
+            class="label-more"
+            for="movie-1"
+          >
+            Ver tudo
+          </label>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+  <div
+    class="input-save-avaliation card-base d-block mt-3"
+  >
+    <input
+      class="avaliation-container col-6"
+      data-testid="avaliation-save-input-main"
+      placeholder="Deixe sua avaliação aqui"
+      title=""
+    />
+    <div
+      class="btn btn-primary save-avaliation col-6 "
+      data-testid="review-onsave"
+      style="width: 334px;"
+      title=""
+    >
+      SALVAR AVALIAÇÃO
+    </div>
+  </div>
+  <div
+    class="user-avaliation card-base mt-3"
+  >
+    <div
+      class="user-avaliation-container pt-3"
+    >
+      <div
+        class="username"
+      >
+        <img
+          alt="estrela amarela"
+          src="icon-star.svg"
+        />
+        <span>
+           
+          Alex Brown
+        </span>
+      </div>
+      <div
+        class="comment border-radius-20"
+      >
+        <p>
+          Achei o filme ótimo, meus parabéns para o diretor!!!
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<MovieDetails /> should render disable save review when use is not a member 1`] = `
+<div
+  class="movie-details-container"
+>
+  <div
+    class="movie-details d-flex card-base"
+  >
+    <div
+      class="movie-main-image"
+    >
+      <img
+        height="320"
+        src="https://www.themoviedb.org/t/p/w533_and_h300_bestv2/5fRAAO13URmteku8mb39V9YPJBb.jpg"
+        width="526"
+      />
+    </div>
+    <div
+      class="movie-main-details"
+    >
+      <div
+        class="card-title-detail"
+        data-testid="movie-title"
+      >
+        <span>
+          Loki
+        </span>
+      </div>
+      <div
+        class="card-year-detail"
+      >
+        <span>
+          2021
+        </span>
+      </div>
+      <div
+        class="card-synopsis-detail"
+      >
+        <span>
+          O vilão Loki reempreende seu papel como o Deus do Mal....
+        </span>
+      </div>
+      <div
+        class="card-description border-radius-20"
+      >
+        <blockquote>
+          <input
+            class="more-information"
+            data-testid="view-more"
+            id="movie-1"
+            type="checkbox"
+          />
+          <p
+            class="description"
+          >
+            Loki é uma série estadunidense criada por Michael Waldron para o Disney+, baseada no personagem de mesmo nome da Marvel Comics. É ambientada no Universo Cinematográfico Marvel (UCM), compartilhando continuidade com os filmes da franquia. A série se passa após os eventos do filme Vingadores: Ultimato (2019), no qual uma versão alternativa de Loki cria uma nova linha do tempo. Loki é produzida pelo Marvel Studios, com Waldron atuando como roteirista principal e Kate Herron dirigindo a primeira temporada.Tom Hiddleston repete seu papel como Loki da série de filmes, com Gugu Mbatha-Raw, Wunmi Mosaku, Eugene Cordero, Tara Strong, Owen Wilson, Sophia Di Martino, Sasha Lane, Jack Veal, DeObia Oparei, Richard E. Grant e Jonathan Majors também estrelando. Em setembro de 2018, o Marvel Studios estava desenvolvendo uma série de séries limitadas para o Disney+, centradas em personagens coadjuvantes dos filmes do UCM.Depois de roubar o Tesseract durante os eventos de Vingadores: Ultimato, uma versão alternativa de Loki é trazida para a misteriosa Autoridade de Variância Temporal (AVT), uma organização burocrática que existe fora do tempo e do espaço, e monitora a linha do tempo. Eles dão a Loki uma escolha: ser apagado da existência por ser uma "variante do tempo" ou ajudar a consertar a linha do tempo e impedir uma ameaça maior. Loki acaba preso em seu próprio thriller policial, viajando no tempo e alterando a história da humanidade.
+          </p>
+          <label
+            class="label-more"
+            for="movie-1"
+          >
+            Ver tudo
+          </label>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+  <div
+    class="input-save-avaliation card-base d-block mt-3"
+  >
+    <input
+      class="avaliation-container col-6"
+      data-testid="avaliation-save-input-main"
+      disabled=""
+      placeholder="Deixe sua avaliação aqui"
+      title="Somente membros podem salvar uma avaliação"
+    />
+    <div
+      class="btn btn-primary save-avaliation col-6 invalid-save-review"
+      data-testid="review-onsave"
+      style="width: 334px;"
+      title="Somente membros podem salvar uma avaliação"
+    >
+      SALVAR AVALIAÇÃO
+    </div>
+  </div>
+  <div
+    class="user-avaliation card-base mt-3"
+  >
+    <div
+      class="user-avaliation-container pt-3"
+    >
+      <div
+        class="username"
+      >
+        <img
+          alt="estrela amarela"
+          src="icon-star.svg"
+        />
+        <span>
+           
+          Alex Brown
+        </span>
+      </div>
+      <div
+        class="comment border-radius-20"
+      >
+        <p>
+          Achei o filme ótimo, meus parabéns para o diretor!!!
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,41 @@
+.user-avaliation {
+  padding: 14px 22px 21px 23px;
+}
+.username {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: -0.015em;
+  color: var(--pure-white);
+  margin-bottom: 5px;
+
+  img {
+    margin: 0 15px 5px 17px;
+  }
+}
+
+.comment {
+  width: 1131px;
+  min-height: 51px;
+  padding: 13px 16px 0 19px;
+  border: 1px solid var(--border);
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: justify;
+  letter-spacing: -0.015em;
+  color: var(--grey);
+}
+
+@media (max-width: 576px) {
+  .user-avaliation {
+    margin: 0 auto;
+    width: 98vw !important;
+    padding: 7px .034vw 30px .034vw;
+  }
+  .comment {
+    margin: 0 auto !important;
+    width: 90vw !important;
+    height: auto;
+  }
+}

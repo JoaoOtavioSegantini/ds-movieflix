@@ -1,0 +1,23 @@
+input.form-control {
+  margin-bottom: 32px;
+  border: 1px solid var(--input-border-color);
+  background-color: var(--input-border-color);
+  box-sizing: border-box;
+  display: flex;
+  border-radius: 10px;
+  margin-left: 51px;
+  width: 384px;
+  height: 50px;
+  align-items: center;
+
+  &:focus {
+    background-color: var(--input-border-color);
+  }
+}
+
+@media (max-width: 576px) {
+  input.form-control {
+    width: 85%;
+    margin: 6vw auto;
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@type/*": ["src/core/types/*"],
+      "@components/*": ["src/core/components/*"],
+      "@images/*": ["src/core/assets/images/*"],
+      "@utils/*": ["src/core/utils/*"],
+      "@mock/*": ["jest/*"]
+    }
+  }
+}

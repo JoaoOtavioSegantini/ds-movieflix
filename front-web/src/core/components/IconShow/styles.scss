@@ -1,0 +1,52 @@
+.icon-show-hide {
+  position: absolute;
+  left: 380px;
+  top: -68px;
+}
+
+@media (max-width: 576px) {
+  .icon-show-hide {
+    left: 72vw !important;
+    top: -60px;
+  }
+}
+
+@media (max-width: 540px) {
+  .icon-show-hide {
+    left: calc(100% - 16vw) !important;
+    top: -12vw;
+  }
+}
+
+@media (max-width: 500px) {
+  .icon-show-hide {
+    left: calc(100% - 74vw) !important;
+    top: calc(100% - 14vw);
+  }
+}
+
+@media (max-width: 420px) {
+  .icon-show-hide {
+    left: 70vw !important;
+    top: -14.5vw;
+  }
+}
+
+@media (max-width: 380px) {
+  .icon-show-hide {
+    top: -15vw;
+  }
+}
+
+@media (max-width: 350px) {
+  .icon-show-hide {
+    top: -17vw;
+  }
+}
+
+@media (max-width: 300px) {
+  .icon-show-hide {
+    left: 68vw !important;
+    top: -18vw;
+   }
+}

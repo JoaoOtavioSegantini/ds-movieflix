@@ -1,0 +1,56 @@
+.overlay {
+    background: rgba(242, 243, 245, 0.8);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-modal {
+    background: var(--partial-white);
+    width: 100%;
+    max-width: 400px;
+    padding: .7rem 2rem;
+    border-radius: 5px;
+    border: 1px solid black;
+    text-align: center;
+    position: relative;
+}
+
+.container-modal header {
+    font-weight: 600;
+    font-size: 1.55rem;
+    text-transform: uppercase;
+    color: var(--primary-color);
+    padding: 0;
+    margin: 0;
+    background-size: contain;
+
+}
+
+.container-modal strong {
+    font-size: 1.25rem;
+    color: var(--background);
+
+}
+.container-modal p {
+    font-size: 1rem;
+    color: var(--grey);
+    font-weight: 500;
+    margin-top: 0.5rem;
+    text-align: justify;
+}
+
+.container-modal button {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    background: transparent;
+    border: 0;
+    font-size: 0;
+
+}

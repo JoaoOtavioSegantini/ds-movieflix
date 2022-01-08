@@ -1,0 +1,40 @@
+.cards {
+  width: 270px;
+  height: 322px;
+  margin-top: 45px;
+}
+
+.card-title {
+  font-size: 20px;
+  line-height: 27px;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+  margin-top: 13px;
+  padding-left: 14px;
+  color: var(--pure-white);
+}
+
+.card-image {
+  .movie-image {
+    margin-top: 23px;
+    height: 164.09px;
+    width: 270px;
+  }
+}
+
+.card-year {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 22px;
+  padding-left: 14px;
+  letter-spacing: -0.015em;
+  color: var(--primary-color);
+}
+
+.card-synopsis {
+  font-size: 14px;
+  line-height: 19px;
+  padding-left: 14px;
+  letter-spacing: -0.015em;
+  color: var(--pure-white);
+}

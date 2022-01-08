@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Navbar /> should render <Navbar /> component 1`] = `
+<div>
+  <nav
+    class="row bg-primary main-nav"
+  >
+    <div
+      class="navbar"
+    >
+      <a
+        class="logo-text col-3"
+        href="/"
+      >
+        MovieFlix
+      </a>
+    </div>
+  </nav>
+</div>
+`;

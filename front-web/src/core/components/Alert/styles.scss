@@ -1,0 +1,22 @@
+.alert {
+  width: 384px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background-color: var(--alert-white);
+  margin-left: 51px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.alert .alert-text-form-invalid {
+  padding-top: 15px;
+  color: var(--invalid-form-color);
+}
+
+.alert .form-invalid-x {
+  color: var(--invalid-form-color);
+  cursor: pointer;
+}
