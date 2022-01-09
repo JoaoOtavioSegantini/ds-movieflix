@@ -6,6 +6,7 @@ import MovieDetails from './pages/MovieDetails'
 import history from '@utils/history'
 import PrivateRoute from '@components/Routes/PrivateRoute'
 import { isAuthenticated } from '@utils/auth'
+import MyReviewsPage from './pages/MyReviews'
 
 const Routes = () => {
   return (
@@ -25,6 +26,9 @@ const Routes = () => {
         />
         <PrivateRoute path="/movies" exact>
           <Movies />
+        </PrivateRoute>
+        <PrivateRoute allowedRoutes={['MEMBER']} path="/reviews" exact>
+          <MyReviewsPage />
         </PrivateRoute>
         <PrivateRoute path="/movies/:movieId">
           <MovieDetails />
