@@ -1,15 +1,15 @@
 import './styles.scss'
-import { MyReviews } from '@type/Review'
-import { makePrivateRequest } from '@utils/request'
-import { isAllowedByRole } from '@utils/auth'
-import ReviewsLoader from '@components/Loaders/ReviewsLoader'
-import { Modal } from '@components/InfoModal'
-import { ReactComponent as Edit } from '@images/edit.svg'
-import { ReactComponent as Exclude } from '@images/garbage.svg'
 
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
-import { Link } from 'react-router-dom'
+
+import { MyReviews } from '@type/Review'
+import { makePrivateRequest } from '@utils/request'
+import { isAllowedByRole } from '@utils/auth'
+
+import CardReview from '@components/CardReview'
+import { Modal } from '@components/InfoModal'
+import ReviewsLoader from '@components/Loaders/ReviewsLoader'
 
 const MyReviewsPage = () => {
   const [myReview, setMyReview] = useState<[MyReviews]>()
@@ -51,52 +51,7 @@ const MyReviewsPage = () => {
           <h1>Minhas Avaliações</h1>
           <div className="movie-details-review">
             {myReview?.map((card) => (
-              <div
-                className="card mb-3 card-my-review"
-                style={{ maxWidth: '100%' }}
-                key={card.id}
-              >
-                <div className="row no-gutters">
-                  <div className="col-md-3">
-                    <Link to={`/movies/${card.movieId}`}>
-                      <img
-                        src={card.imgUrl}
-                        width={250}
-                        style={{ height: '100%' }}
-                      />
-                    </Link>
-                  </div>
-                  <div className="col-md-6 card-review-container">
-                    <div className="card-body">
-                      <h5 className="card-title">{card.title}</h5>
-                      <p className="card-text">{card.subTitle}</p>
-                      <p className="card-text">
-                        <small className="text-muted">{card.text}</small>
-                      </p>
-                    </div>
-                  </div>
-                  <div className="col-md-3">
-                    <div className="card-body">
-                      <div className="d-flex">
-                        <Link
-                          to={`/reviews/${card.id}/edit`}
-                          className="btn settings-btn"
-                          style={{ height: 'auto' }}
-                        >
-                          <Edit />
-                        </Link>
-                        <Link
-                          to="#"
-                          className="btn settings-btn"
-                          style={{ height: 'auto' }}
-                        >
-                          <Exclude />
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <CardReview review={card} key={card.id} />
             ))}
           </div>
         </>
