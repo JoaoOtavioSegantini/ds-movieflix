@@ -11,6 +11,7 @@ import { Link, useLocation } from 'react-router-dom'
 
 import { ReactComponent as Dropdown } from '@images/dropdown.svg'
 import { ReactComponent as UserDropdown } from '@images/user-dropdown-menu.svg'
+import { ReactComponent as Admin } from '@images/admin.svg'
 
 import UserDropdownMenu from '@images/user-dropdown-menu'
 import Star from '@images/review-dropdown-star'
@@ -69,15 +70,12 @@ const Navbar = () => {
                 {isAdmin && (
                   <li>
                     <Link className="dropdown-item" to="/admin">
-                      <UserDropdownMenu color="#6c6c6c" /> Administração
+                      <Admin color="#6c6c6c" /> Administração
                     </Link>
                   </li>
                 )}
                 <li>
-                  <button
-                    className="dropdown-item"
-                    onClick={() => handleLogout}
-                  >
+                  <button className="dropdown-item" onClick={logout}>
                     <Logout color="#9e9e9e" /> Sign Out
                   </button>
                 </li>

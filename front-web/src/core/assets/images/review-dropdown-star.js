@@ -7,7 +7,7 @@ function Icon({ color }) {
       width="32"
       height="32"
       fill="none"
-      // viewBox="0 0 32 32"
+      viewBox="0 0 32 32"
     >
       <g>
         <path

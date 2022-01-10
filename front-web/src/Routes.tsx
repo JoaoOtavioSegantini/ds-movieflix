@@ -7,6 +7,7 @@ import history from '@utils/history'
 import PrivateRoute from '@components/Routes/PrivateRoute'
 import { isAuthenticated } from '@utils/auth'
 import MyReviewsPage from './pages/MyReviews'
+import EditReview from './pages/EditReview'
 
 const Routes = () => {
   return (
@@ -41,7 +42,7 @@ const Routes = () => {
           allowedRoutes={['MEMBER', 'ROLE_ADMIN']}
           path="/reviews/:reviewId/edit"
         >
-          <div>edit</div>
+          <EditReview />
         </PrivateRoute>
         <PrivateRoute allowedRoutes={['ROLE_ADMIN']} path="/admin">
           <div>Admin</div>
