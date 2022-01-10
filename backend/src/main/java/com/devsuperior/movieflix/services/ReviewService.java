@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.devsuperior.movieflix.dto.ResponseMyReviewsDTO;
 import com.devsuperior.movieflix.dto.ReviewDTO;
 import com.devsuperior.movieflix.entities.Movie;
 import com.devsuperior.movieflix.entities.Review;
@@ -47,24 +46,20 @@ public class ReviewService {
 		return new ReviewDTO(entity);
 	}
 	
+
+	
 	@Transactional
 	public ReviewDTO insert(ReviewDTO dto) {
 		String text = dto.getText();
 		String username = authService.authenticated().getEmail();
 		User user = userRepository.findByEmail(username);
 		Movie movie = movieRepository.getOne(dto.getMovieId());
-		Review review = new Review(null, text, user, movie);
-
+	    Review review = new Review(null, text, user, movie);
+		
 		repository.save(review);
 		return new ReviewDTO(review);
 	}
-
 	
-	@Transactional(readOnly = true)
-	public List<ResponseMyReviewsDTO> find() {
-		Long id = authService.authenticated().getId();
-		List<Review> list = repository.findMyReviews(id);
-		return list.stream().map(x -> new ResponseMyReviewsDTO(x)).collect(Collectors.toList());
-	}
+
 
 }

@@ -30,12 +30,6 @@ public class ReviewResource {
 		ReviewDTO dto = service.findById(id);
 		return ResponseEntity.ok().body(dto);
 	}
-
-	@GetMapping(value = "/myReviews")
-	public ResponseEntity<List<ResponseMyReviewsDTO>> find() {
-		List<ResponseMyReviewsDTO> dto = service.find();
-		return ResponseEntity.ok().body(dto);
-	}
 	
 	@PostMapping
 	public ResponseEntity<ReviewDTO> insert(@Valid @RequestBody ReviewDTO dto) {
