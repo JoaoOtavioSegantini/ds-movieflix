@@ -27,8 +27,24 @@ const Routes = () => {
         <PrivateRoute path="/movies" exact>
           <Movies />
         </PrivateRoute>
-        <PrivateRoute allowedRoutes={['MEMBER']} path="/reviews" exact>
+        <PrivateRoute path="/account" exact>
+          <div>Account</div>
+        </PrivateRoute>
+        <PrivateRoute
+          allowedRoutes={['MEMBER', 'ROLE_ADMIN']}
+          path="/reviews"
+          exact
+        >
           <MyReviewsPage />
+        </PrivateRoute>
+        <PrivateRoute
+          allowedRoutes={['MEMBER', 'ROLE_ADMIN']}
+          path="/reviews/:reviewId/edit"
+        >
+          <div>edit</div>
+        </PrivateRoute>
+        <PrivateRoute allowedRoutes={['ROLE_ADMIN']} path="/admin">
+          <div>Admin</div>
         </PrivateRoute>
         <PrivateRoute path="/movies/:movieId">
           <MovieDetails />

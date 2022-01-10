@@ -11,7 +11,7 @@ export type LoginResponse = {
   userId: number
 }
 
-export type Authority = 'VISITOR' | 'MEMBER'
+export type Authority = 'VISITOR' | 'MEMBER' | 'ROLE_ADMIN'
 
 export type AccessToken = {
   exp: number

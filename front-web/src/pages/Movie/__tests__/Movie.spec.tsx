@@ -19,6 +19,7 @@ const server = setupServer(
 
 beforeAll(() => {
   server.listen()
+  jest.setTimeout(25000)
 })
 afterEach(() => server.resetHandlers())
 afterAll(() => server.close())

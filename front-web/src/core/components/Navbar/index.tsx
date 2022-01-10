@@ -1,17 +1,33 @@
 import './styles.scss'
 
-import { getAccessTokenDecoded, isTokenValid, logout } from '@utils/auth'
+import {
+  getAccessTokenDecoded,
+  isAllowedByRole,
+  isTokenValid,
+  logout
+} from '@utils/auth'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
+import { ReactComponent as Dropdown } from '@images/dropdown.svg'
+import { ReactComponent as UserDropdown } from '@images/user-dropdown-menu.svg'
+
+import UserDropdownMenu from '@images/user-dropdown-menu'
+import Star from '@images/review-dropdown-star'
+import Logout from '@images/logout'
+
 const Navbar = () => {
-  const [currentUser, setCurretUser] = useState('')
+  const [currentUser, setCurretUser] = useState({ email: '', name: '' })
   const { user_name } = getAccessTokenDecoded()
   const isValid = isTokenValid()
   const location = useLocation()
+  const isAdmin = isAllowedByRole(['ROLE_ADMIN'])
+  const isMemberOrAdmin = isAllowedByRole(['MEMBER', 'ROLE_ADMIN'])
 
   useEffect(() => {
-    setCurretUser(user_name)
+    const authData = JSON.parse(localStorage.getItem('authData')!)
+    const name = authData ? authData.userName : ''
+    setCurretUser({ ...currentUser, email: user_name, name })
   }, [location, user_name])
 
   const handleLogout = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -26,12 +42,55 @@ const Navbar = () => {
           MovieFlix
         </Link>
         {isValid && (
-          <div
-            title={currentUser}
-            className="col-9 auth-button btn btn-primary"
-            onClick={handleLogout}
-          >
-            SAIR
+          <div className="navbar-current-items d-flex">
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-togglenew"
+                href="#"
+                data-bs-toggle="dropdown"
+              >
+                <UserDropdown style={{ marginRight: '5px' }} />{' '}
+                {currentUser.name}
+                <Dropdown style={{ marginLeft: '5px' }} />
+              </a>
+              <ul className="dropdown-menu fade-up">
+                <li>
+                  <Link className="dropdown-item" to="account">
+                    <UserDropdownMenu color="#9e9e9e" /> My account
+                  </Link>
+                </li>
+                {isMemberOrAdmin && (
+                  <li>
+                    <Link className="dropdown-item" to="/reviews">
+                      <Star color="#6c6c6c" /> My Reviews
+                    </Link>
+                  </li>
+                )}
+                {isAdmin && (
+                  <li>
+                    <Link className="dropdown-item" to="/admin">
+                      <UserDropdownMenu color="#6c6c6c" /> Administração
+                    </Link>
+                  </li>
+                )}
+                <li>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => handleLogout}
+                  >
+                    <Logout color="#9e9e9e" /> Sign Out
+                  </button>
+                </li>
+              </ul>
+            </li>
+
+            <div
+              title={currentUser.email}
+              className="col-9 auth-button btn btn-primary"
+              onClick={handleLogout}
+            >
+              SAIR
+            </div>
           </div>
         )}
       </div>
