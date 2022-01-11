@@ -12,19 +12,20 @@ INSERT INTO tb_genre (name)  VALUES ('Terror');
 
 INSERT INTO tb_role (authority)  VALUES ('VISITOR');
 INSERT INTO tb_role (authority)  VALUES ('MEMBER');
- 
-INSERT INTO tb_user (name, email, password, enabled) VALUES ('Alex Brown', 'alex@gmail.com', '$2a$10$HSfDbwxcMCQs3xVVSDWYwu32/uZ4jgTWVz.hU3W8APxb9Z4FYf0O6', true);
-INSERT INTO tb_user (name, email, password, enabled) VALUES ('Bob Brown', 'bob@gmail.com', '$2a$10$4cPsrVtO3wmxDLifofRPked1mO12aj49eM0jDoykfOQ.n6cPHN3ju', true);
-INSERT INTO tb_user (name, email, password, enabled) VALUES ('Maria', 'maria@gmail.com', '$2a$10$2ppHgi1XTTjYSgbQri.SBeV77t2eWdUaqPrrB7hELKfU8381PXzv2', true);
-INSERT INTO tb_user (name, email, password, enabled) VALUES ('João Otávio', 'joao@gmail.com', '$2a$10$a0xXM7es.VsZjCGFUz9DOOYlpNYcBwE/nX/Ew8fLXEeWT6pnyqqvm', true);
-INSERT INTO tb_user (name, email, password, enabled) VALUES ('Ana Carla', 'ana@gmail.com', '$2a$10$eBQbNsFz7trzcw1xDuF0zOudQUMNih4Q4YQmry346bORYz2KeWFny', true);
+INSERT INTO tb_role (authority) VALUES ('ROLE_ADMIN');
+
+INSERT INTO tb_user (name, email, password) VALUES ('Alex Brown', 'alex@gmail.com', '$2a$10$HSfDbwxcMCQs3xVVSDWYwu32/uZ4jgTWVz.hU3W8APxb9Z4FYf0O6');
+INSERT INTO tb_user (name, email, password) VALUES ('Bob Brown', 'bob@gmail.com', '$2a$10$4cPsrVtO3wmxDLifofRPked1mO12aj49eM0jDoykfOQ.n6cPHN3ju');
+INSERT INTO tb_user (name, email, password) VALUES ('Maria', 'maria@gmail.com', '$2a$10$2ppHgi1XTTjYSgbQri.SBeV77t2eWdUaqPrrB7hELKfU8381PXzv2');
+INSERT INTO tb_user (name, email, password) VALUES ('João Otávio', 'joaossmp@gmail.com', '$2a$10$a0xXM7es.VsZjCGFUz9DOOYlpNYcBwE/nX/Ew8fLXEeWT6pnyqqvm');
+INSERT INTO tb_user (name, email, password) VALUES ('Ana Carla', 'ana@gmail.com', '$2a$10$eBQbNsFz7trzcw1xDuF0zOudQUMNih4Q4YQmry346bORYz2KeWFny');
 
 INSERT INTO tb_user_role (user_id, role_id)  VALUES (1, 2);
 INSERT INTO tb_user_role (user_id, role_id)  VALUES (2, 1);
 INSERT INTO tb_user_role (user_id, role_id)  VALUES (3, 1);
 INSERT INTO tb_user_role (user_id, role_id)  VALUES (4, 2);
+INSERT INTO tb_user_role (user_id, role_id)  VALUES (4, 3);
 INSERT INTO tb_user_role (user_id, role_id)  VALUES (5, 2);
-
 
 
 INSERT INTO tb_movie (img_url, sub_title, synopsis, title, year, genre_id)  VALUES ('https://www.themoviedb.org/t/p/w533_and_h300_bestv2/5fRAAO13URmteku8mb39V9YPJBb.jpg','O vilão Loki reempreende seu papel como o Deus do Mal....', 'Loki é uma série estadunidense criada por Michael Waldron para o Disney+, baseada no personagem de mesmo nome da Marvel Comics. É ambientada no Universo Cinematográfico Marvel (UCM), compartilhando continuidade com os filmes da franquia. A série se passa após os eventos do filme Vingadores: Ultimato (2019), no qual uma versão alternativa de Loki cria uma nova linha do tempo. Loki é produzida pelo Marvel Studios, com Waldron atuando como roteirista principal e Kate Herron dirigindo a primeira temporada.Tom Hiddleston repete seu papel como Loki da série de filmes, com Gugu Mbatha-Raw, Wunmi Mosaku, Eugene Cordero, Tara Strong, Owen Wilson, Sophia Di Martino, Sasha Lane, Jack Veal, DeObia Oparei, Richard E. Grant e Jonathan Majors também estrelando. Em setembro de 2018, o Marvel Studios estava desenvolvendo uma série de séries limitadas para o Disney+, centradas em personagens coadjuvantes dos filmes do UCM.Depois de roubar o Tesseract durante os eventos de Vingadores: Ultimato, uma versão alternativa de Loki é trazida para a misteriosa Autoridade de Variância Temporal (AVT), uma organização burocrática que existe fora do tempo e do espaço, e monitora a linha do tempo. Eles dão a Loki uma escolha: ser apagado da existência por ser uma "variante do tempo" ou ajudar a consertar a linha do tempo e impedir uma ameaça maior. Loki acaba preso em seu próprio thriller policial, viajando no tempo e alterando a história da humanidade.', 'Loki', 2021,9);
@@ -59,3 +60,5 @@ INSERT INTO tb_movie (img_url, sub_title, synopsis, title, year, genre_id)  VALU
 INSERT INTO tb_movie (img_url, sub_title, synopsis, title, year, genre_id)  VALUES ('https://www.themoviedb.org/t/p/w533_and_h300_bestv2/AmHOQ7rpHwiaUMRjKXztnauSJb7.jpg', 'Um militar paraplégico', 'Apesar de não ter mais os movimentos da perna, o ex-fuzileiro naval Jake Sully ainda sente que pode ser um guerreiro. Sua intuição começa a se tornar realidade quando ele viaja anos-luz até a estação espacial montada no Planeta Pandora. Habitado por grandes seres azuis, os Na´vi, o local tem uma atmosfera fatal para qualquer terrestre. Por isso, oficiais criaram o programa Avatar, em que um corpo biológico, híbrido de humano e Na´vi, pode ser comandado a distância.Um militar paraplégico despachado para a lua Pandora em uma missão única fica dividido entre seguir suas ordens e proteger o mundo que ele sente ser sua casa.', 'Avatar', 2009, 9); 
 
 INSERT INTO tb_review (text, movie_id, user_id) VALUES ('Achei o filme ótimo, meus parabéns para o diretor!!!', 1, 1);
+INSERT INTO tb_review (text, movie_id, user_id) VALUES ('Filme bom para passar o domingo em familia!', 8, 5);
+INSERT INTO tb_review (text, movie_id, user_id) VALUES ('Não gostei tanto, mas ele até que não é tão ruim assim', 18, 1);
