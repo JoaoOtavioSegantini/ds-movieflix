@@ -51,7 +51,7 @@ const EditReview = () => {
       data: { text: saveRev }
     })
       .then(() => {
-        toast.success(`Avaliação do enviada com sucesso!`)
+        toast.success(`Edição realizada com sucesso!`)
 
         history.replace('/reviews')
       })
@@ -91,7 +91,7 @@ const EditReview = () => {
                 </p>
               </div>
               <div className="btn btn-primary rev-btn">
-                <Link to="../">
+                <Link to="..">
                   <Close
                     style={{ marginRight: '18px', marginLeft: '21px' }}
                     className="close-svg"
