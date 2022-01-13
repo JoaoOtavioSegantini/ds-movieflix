@@ -17,7 +17,6 @@ import com.devsuperior.movieflix.entities.Genre;
 import com.devsuperior.movieflix.entities.Movie;
 import com.devsuperior.movieflix.repositories.GenreRepository;
 import com.devsuperior.movieflix.repositories.MovieRepository;
-import com.devsuperior.movieflix.repositories.ReviewRepository;
 import com.devsuperior.movieflix.services.exceptions.DataBaseException;
 import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
 
@@ -26,9 +25,6 @@ public class MovieService {
 	
 	@Autowired
 	private MovieRepository repository;
-	
-	//@Autowired
-//	private ReviewRepository reviewRepository;
 	
 	@Autowired
 	private GenreRepository genreRepository;
@@ -63,12 +59,6 @@ public class MovieService {
 		entity.setImgUrl(dto.getImgUrl());
 		Genre genre = genreRepository.getOne(dto.getGenreId());
 		entity.setGenre(genre);
-
-	//	entity.getReviews().clear();
-//		for (ReviewDTO revDto : dto.getReviews()) {
-	//		Review review = reviewRepository.getOne(revDto.getId());
-//			entity.getReviews().add(review);
-	//	}
 
 	}
 	
