@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.devsuperior.movieflix.entities.Movie;
@@ -22,14 +23,14 @@ public class MovieDTO implements Serializable {
 	@Size(min = 5, max = 100, message = "O campo subtítulo deve ter no mínimo 5 letras e no máximo 100")
 	private String subTitle;
 	
-	@NotBlank(message = "Campo obrigatório")
+	@NotNull(message = "Campo obrigatório")
 	private Integer year;
 	
 	@NotBlank(message = "Campo obrigatório")
 	private String imgUrl;
 	
 	@NotBlank(message = "Campo obrigatório")
-	@Size(min = 20, max = 800, message = "O campo da descrição deve ter no mínimo 20 letras")
+	@Size(min = 20, message = "O campo da descrição deve ter no mínimo 20 letras")
 	private String synopsis;
 		
 	private Long genreId;
