@@ -23,6 +23,6 @@ public class MailContentBuilder {
         context.setVariable("token", client.getToken());
         context.setVariable("contact", client.getExpiryDate());
         
-        return templateEngine.process("mailTemplate", context);
+        return templateEngine.process("email/reset-password-instructions", context);
     }
 }
