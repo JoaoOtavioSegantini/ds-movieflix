@@ -21,32 +21,33 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devsuperior.movieflix.dto.MovieDTO;
+import com.devsuperior.movieflix.services.AuthService;
 import com.devsuperior.movieflix.services.MovieService;
 
 @RestController
 @RequestMapping(value = "/movies")
 public class MovieResource {
-	
+
 	@Autowired
 	private MovieService service;
-	
-	
+
+	@Autowired
+	private AuthService authService;
+
 	@GetMapping
 	public ResponseEntity<Page<MovieDTO>> findAll(
 
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
-        	@RequestParam(value = "genreId", defaultValue = "0") Long genreId,
+			@RequestParam(value = "genreId", defaultValue = "0") Long genreId,
 			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
-			@RequestParam(value = "orderBy", defaultValue = "title") String orderBy
-	) {
+			@RequestParam(value = "orderBy", defaultValue = "title") String orderBy) {
 
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-
-         Page<MovieDTO> list = service.findAllPaged(genreId, pageRequest);
+		Page<MovieDTO> list = service.findAllPaged(genreId, pageRequest);
 		return ResponseEntity.ok().body(list);
 	}
-	
+
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<MovieDTO> findById(@PathVariable Long id) {
 		MovieDTO dto = service.findById(id);
@@ -55,13 +56,17 @@ public class MovieResource {
 
 	@PostMapping
 	public ResponseEntity<MovieDTO> insert(@Valid @RequestBody MovieDTO dto) {
+		Long id = authService.authenticated().getId();
+		authService.validateAdmin(id);
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(dto);
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<MovieDTO> update(@PathVariable Long id,@Valid @RequestBody MovieDTO dto) {
+	public ResponseEntity<MovieDTO> update(@PathVariable Long id, @Valid @RequestBody MovieDTO dto) {
+		Long userid = authService.authenticated().getId();
+		authService.validateAdmin(userid);
 		dto = service.update(id, dto);
 
 		return ResponseEntity.ok().body(dto);
@@ -69,8 +74,9 @@ public class MovieResource {
 
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<MovieDTO> delete(@PathVariable Long id) {
-		 service.delete(id);
-
+		Long userid = authService.authenticated().getId();
+		authService.validateAdmin(userid);
+		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 

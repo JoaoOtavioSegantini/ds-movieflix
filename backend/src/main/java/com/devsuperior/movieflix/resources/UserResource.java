@@ -32,9 +32,9 @@ public class UserResource {
 
 	@Autowired
 	private UserService service;
-	
+
 	@Autowired
-	AuthService authService;
+	private AuthService authService;
 
 	@GetMapping
 	public ResponseEntity<Page<UserDTO>> findAll(
@@ -42,17 +42,20 @@ public class UserResource {
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
-			@RequestParam(value = "orderBy", defaultValue = "name") String orderBy
-	) {
+			@RequestParam(value = "orderBy", defaultValue = "name") String orderBy) {
 
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-         Page<UserDTO> list = service.findAllPaged(pageRequest);
+		Long id = authService.authenticated().getId();
+		authService.validateAdmin(id);
+		Page<UserDTO> list = service.findAllPaged(pageRequest);
+
 		return ResponseEntity.ok().body(list);
 	}
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
-		authService.validateSelfOrAdmin(id);
+		Long userId = authService.authenticated().getId();
+		authService.validateSelfOrAdmin(userId);
 		UserDTO dto = service.findById(id);
 		return ResponseEntity.ok().body(dto);
 	}
@@ -66,7 +69,8 @@ public class UserResource {
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<UserDTO> update(@PathVariable Long id, @Valid @RequestBody UserUpdateDTO dto) {
-		authService.validateSelfOrAdmin(id);
+		Long userid = authService.authenticated().getId();
+		authService.validateSelfOrAdmin(userid);
 		UserDTO newDto = service.update(id, dto);
 
 		return ResponseEntity.ok().body(newDto);
@@ -74,9 +78,9 @@ public class UserResource {
 
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<UserDTO> delete(@PathVariable Long id) {
-		authService.validateSelfOrAdmin(id);
-		 service.delete(id);
-
+		Long userId = authService.authenticated().getId();
+		authService.validateSelfOrAdmin(userId);
+		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 }
