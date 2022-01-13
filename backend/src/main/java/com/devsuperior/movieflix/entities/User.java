@@ -1,10 +1,8 @@
 package com.devsuperior.movieflix.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -17,15 +15,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import org.jboss.aerogear.security.otp.api.Base32;
-
 
 @Entity
 @Table(name = "tb_user")
@@ -42,9 +36,6 @@ public class User implements UserDetails, Serializable {
 	
 	private String password;
 	private String name;
-    private boolean enabled;
-    private String secret;
-
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
@@ -53,13 +44,8 @@ public class User implements UserDetails, Serializable {
 			inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 	
-	//@OneToMany(mappedBy = "user")
-	//private List<Review> reviews = new ArrayList<>();
-	
 	public User () {
-		super();
-        this.secret = Base32.random();
-        this.enabled = false;
+
 		
 	}
 	
@@ -107,27 +93,6 @@ public class User implements UserDetails, Serializable {
 		return roles;
 	}
 	
-//	public List<Review> getReviews() {
-	//	return reviews;
-	//}
-	
-	public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(final boolean enabled) {
-        this.enabled = enabled;
-    }
-    
-    public String getSecret() {
-        return secret;
-    }
-
-    public void setSecret(String secret) {
-        this.secret = secret;
-    }
-
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -179,6 +144,12 @@ public class User implements UserDetails, Serializable {
 
 	@Override
 	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
 	}
