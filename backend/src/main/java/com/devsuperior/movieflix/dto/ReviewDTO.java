@@ -64,7 +64,6 @@ public class ReviewDTO implements Serializable {
 	}
 
 
-
 	public UserDTO getUser() {
 		return user;
 	}
@@ -72,11 +71,6 @@ public class ReviewDTO implements Serializable {
 	public void setUser(UserDTO user) {
 		this.user = user;
 	}
-
-
-
-	
-	
 	
 
 }
