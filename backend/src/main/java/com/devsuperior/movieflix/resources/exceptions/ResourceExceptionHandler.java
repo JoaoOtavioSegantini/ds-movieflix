@@ -29,19 +29,6 @@ public class ResourceExceptionHandler {
 		err.setPath(request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
 	}
-	
-	@ExceptionHandler(EmailException.class)
-	public ResponseEntity<StandardError> email(EmailException e, HttpServletRequest request) {
-		HttpStatus status = HttpStatus.BAD_REQUEST;
-		StandardError err = new StandardError();
-		err.setTimestamp(Instant.now());
-		err.setStatus(status.value());
-		err.setError("Email exception");
-		err.setMessage(e.getMessage());
-		err.setPath(request.getRequestURI());
-		return ResponseEntity.status(status).body(err);
-	}
-	
 	@ExceptionHandler(DataBaseException.class)
 	public ResponseEntity<StandardError> database(DataBaseException e, HttpServletRequest request) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
@@ -72,5 +59,15 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(status).body(err);
 	}
 	
-	
+	@ExceptionHandler(EmailException.class)
+	public ResponseEntity<StandardError> email(EmailException e, HttpServletRequest request) {
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		StandardError err = new StandardError();
+		err.setTimestamp(Instant.now());
+		err.setStatus(status.value());
+		err.setError("Email Error");
+		err.setMessage(e.getMessage());
+		err.setPath(request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}
 }
