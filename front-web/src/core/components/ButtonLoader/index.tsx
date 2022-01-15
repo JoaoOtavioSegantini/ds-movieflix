@@ -3,9 +3,10 @@ import './styles.scss'
 type Props = {
   isLoading: boolean
   disabled: boolean
+  isReset: boolean
 }
 
-const ButtonLoader = ({ isLoading, disabled }: Props) => {
+const ButtonLoader = ({ isLoading, disabled, isReset }: Props) => {
   return isLoading ? (
     <button className="btn-icon btn-primary row" type="button" disabled>
       <span
@@ -19,7 +20,7 @@ const ButtonLoader = ({ isLoading, disabled }: Props) => {
     </button>
   ) : (
     <button className="btn-icon btn-primary" disabled={disabled}>
-      <h5>LOGAR</h5>
+      <h5>{isReset ? 'ENVIAR TOKEN' : 'LOGAR'}</h5>
     </button>
   )
 }

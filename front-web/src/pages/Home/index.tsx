@@ -4,10 +4,10 @@ import { ReactComponent as MainImage } from '@images/login.svg'
 import { ReactComponent as ArrowIcon } from '@images/arrow.svg'
 
 import { useHistory, useLocation } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { makeLogin } from '@utils/request'
+import { makeLogin, makeRequest } from '@utils/request'
 import { saveSessionData } from '@utils/auth'
 import Alert from '@components/Alert'
 import ButtonLoader from '@components/ButtonLoader'
@@ -18,6 +18,7 @@ import { toast } from 'react-toastify'
 export type FormState = {
   username: string
   password: string
+  to: string
 }
 
 type LocationState = {
@@ -40,6 +41,7 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false)
   const history = useHistory()
   const location = useLocation<LocationState>()
+  const [isReset, setIsReset] = useState(false)
 
   const handleClickPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword })
@@ -71,6 +73,25 @@ const Home = () => {
       })
   }
 
+  const onReset = (data: FormState) => {
+    setHasError(false)
+    setIsLoading(true)
+    makeRequest({
+      url: '/emails',
+      method: 'POST',
+      data: { to: data.to },
+      headers: { 'content-type': 'application/json' }
+    })
+      .then(() => {
+        setIsLoading(false)
+        toast.success('Token de reset enviado, por favor verifique seu email.')
+      })
+      .catch((err) => {
+        toast.error(err.response?.data.message)
+        setIsLoading(false)
+      })
+  }
+
   return (
     <div className="home-container body-color">
       <div className="home-content">
@@ -81,13 +102,17 @@ const Home = () => {
           </h1>
           <MainImage className="main-image" data-testid="main-image" />
         </div>
-        <form className="col-6 login-base" onSubmit={handleSubmit(onSubmit)}>
-          <h1 className="login-title">LOGIN</h1>
+        <form
+          className="col-6 login-base"
+          onSubmit={handleSubmit(!isReset ? onSubmit : onReset)}
+        >
+          <h1 className="login-title">{isReset ? 'RESET' : 'LOGIN'}</h1>
           {hasError && <Alert onClick={() => setHasError(false)} />}
           <Form
             errors={errors}
             register={register}
             showText={values.showPassword}
+            isReset={isReset}
           >
             <IconShow
               errors={!!errors.password}
@@ -97,15 +122,30 @@ const Home = () => {
               handleMouseDownPassword={handleMouseDownPassword}
             />
           </Form>
+          <a
+            onClick={() => {
+              setIsReset(!isReset)
+              errors.password = undefined
+              errors.to = undefined
+              errors.username = undefined
+            }}
+            className="reset-link"
+          >
+            {!isReset ? 'Esqueceu sua senha ?' : 'Retornar a tela de login'}
+          </a>
           <div className="d-flex">
             <ButtonLoader
               isLoading={isLoading}
               disabled={!!errors.password || !!errors.username}
+              isReset={isReset}
             />
             <div className="btn-icon-content" data-testid="arrowIcon">
               <ArrowIcon />
             </div>
           </div>
+          <a className="sign-btn">
+            Não tem Cadastro?&nbsp;&nbsp;&nbsp; <span>CADASTRAR</span>
+          </a>
         </form>
       </div>
     </div>

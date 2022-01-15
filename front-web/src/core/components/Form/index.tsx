@@ -8,8 +8,9 @@ type Props = {
   register: UseFormRegister<FormState>
   showText: boolean
   children: React.ReactNode
+  isReset: boolean
 }
-const Form = ({ errors, register, showText, children }: Props) => {
+const Form = ({ errors, register, showText, children, isReset }: Props) => {
   return (
     <>
       <input
@@ -18,7 +19,7 @@ const Form = ({ errors, register, showText, children }: Props) => {
           errors.username ? 'is-invalid' : ''
         } `}
         placeholder="Email"
-        {...register('username', {
+        {...register(isReset ? 'to' : 'username', {
           required: 'Campo obrigatório',
           pattern: {
             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -31,17 +32,29 @@ const Form = ({ errors, register, showText, children }: Props) => {
           {errors.username.message}
         </div>
       )}
-      <div className="group ">
-        <input
-          className={`form-control col ${errors.password ? 'is-invalid' : ''} `}
-          type={showText ? 'text' : 'password'}
-          placeholder="Senha"
-          {...register('password', {
-            required: 'Campo obrigatório'
-          })}
-        />
-        {children}
-      </div>
+      {isReset && errors.to && (
+        <div className="invalid-feedback d-block" data-testid="to-error">
+          {errors.to.message}
+        </div>
+      )}
+      {!isReset ? (
+        <div className="group ">
+          <input
+            className={`form-control col ${
+              errors.password ? 'is-invalid' : ''
+            } `}
+            type={showText ? 'text' : 'password'}
+            placeholder="Senha"
+            {...register('password', {
+              required: 'Campo obrigatório'
+            })}
+          />
+
+          {children}
+        </div>
+      ) : (
+        <></>
+      )}
     </>
   )
 }
