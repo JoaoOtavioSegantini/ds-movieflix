@@ -7,13 +7,12 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,12 +49,12 @@ public class PasswordForgotResource {
 	@Value(value = "${frontend.server.name}")
 	private String url;
 
-	@GetMapping
-	public ResponseEntity<Void> send(@RequestBody EmailDTO dto, HttpServletRequest request) {
+	@PostMapping
+	public ResponseEntity<Void> send(@RequestBody @Valid EmailDTO dto) {
 
 		User user = repository.findByEmail(dto.getTo());
 		if (user == null) {
-			throw new EmailException("O usuário " + dto.getTo() + "não foi encontrado.");
+			throw new EmailException("O usuário " + dto.getTo() + " não foi encontrado.");
 		}
 		;
 
@@ -80,7 +79,7 @@ public class PasswordForgotResource {
 
 	}
 
-	@PostMapping
+	@PostMapping(value = "/reset")
 	public ResponseEntity<Void> reset(@RequestBody PasswordForgotDto dto) {
 		PasswordResetToken resetToken = tokenRepository.findByToken(dto.getToken());
 		if (resetToken == null) {

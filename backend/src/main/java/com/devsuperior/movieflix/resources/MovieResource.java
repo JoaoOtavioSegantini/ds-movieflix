@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devsuperior.movieflix.dto.MovieDTO;
+import com.devsuperior.movieflix.dto.MoviesDTO;
 import com.devsuperior.movieflix.services.AuthService;
 import com.devsuperior.movieflix.services.MovieService;
 
@@ -35,7 +36,7 @@ public class MovieResource {
 	private AuthService authService;
 
 	@GetMapping
-	public ResponseEntity<Page<MovieDTO>> findAll(
+	public ResponseEntity<Page<MoviesDTO>> findAll(
 
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "genreId", defaultValue = "0") Long genreId,
@@ -44,7 +45,7 @@ public class MovieResource {
 			@RequestParam(value = "orderBy", defaultValue = "title") String orderBy) {
 
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		Page<MovieDTO> list = service.findAllPaged(genreId, pageRequest);
+		Page<MoviesDTO> list = service.findAllPaged(genreId, pageRequest);
 		return ResponseEntity.ok().body(list);
 	}
 

@@ -44,6 +44,10 @@ public class ResponseMyReviewsDTO implements Serializable {
 		this.title = entity.getMovie().getTitle();
 		this.movieId = entity.getMovie().getId();
 	}
+	
+	public ResponseMyReviewsDTO(Review entity, MovieDTO dto) {
+		
+	}
 
 	public Long getId() {
 		return id;

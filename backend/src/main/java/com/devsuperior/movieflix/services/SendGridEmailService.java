@@ -44,7 +44,6 @@ public class SendGridEmailService implements EmailService {
 
 			Context context = new Context();
 			context.setVariables(dto.getModel());
-			//String html = templateEngine.process("email/email-template", context);
 			String html = templateEngine.process("email/reset-password-instructions", context);
 			dto.setSubject("Password reset request");
 			String sendGridSubject = dto.getSubject();

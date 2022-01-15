@@ -2,8 +2,7 @@ HELP.md
 target/
 .metadata
 !.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+!README.md
 
 ### STS ###
 .apt_generated

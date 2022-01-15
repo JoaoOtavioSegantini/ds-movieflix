@@ -59,6 +59,15 @@ public class UserResource {
 		UserDTO dto = service.findById(id);
 		return ResponseEntity.ok().body(dto);
 	}
+	
+	@GetMapping(value = "/me")
+	public ResponseEntity<UserDTO> findMe() {
+		Long userId = authService.authenticated().getId();
+		authService.validateSelfOrAdmin(userId);
+		UserDTO dto = service.findById(userId);
+		return ResponseEntity.ok().body(dto);
+	}
+
 
 	@PostMapping
 	public ResponseEntity<UserDTO> insert(@Valid @RequestBody UserInsertDTO dto) {

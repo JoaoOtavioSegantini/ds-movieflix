@@ -3,12 +3,19 @@ package com.devsuperior.movieflix.dto;
 import java.io.Serializable;
 import java.util.Map;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 public class EmailDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private String from;
+	
+	@Email
+	@NotBlank
 	private String to;
+	
 	private String subject;
 	private Map<String, Object> model;
 

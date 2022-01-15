@@ -62,3 +62,15 @@ INSERT INTO tb_movie (img_url, sub_title, synopsis, title, year, genre_id)  VALU
 INSERT INTO tb_review (text, movie_id, user_id) VALUES ('Achei o filme ótimo, meus parabéns para o diretor!!!', 1, 1);
 INSERT INTO tb_review (text, movie_id, user_id) VALUES ('Filme bom para passar o domingo em familia!', 8, 5);
 INSERT INTO tb_review (text, movie_id, user_id) VALUES ('Não gostei tanto, mas ele até que não é tão ruim assim', 18, 1);
+
+INSERT INTO tb_review (text, movie_id, user_id) VALUES ('Achei o filme ótimo!', 1, 5);
+INSERT INTO tb_review (text, movie_id, user_id) VALUES ('Filme bom', 8, 1);
+INSERT INTO tb_review (text, movie_id, user_id) VALUES ('Eu me amarro nesse genero...', 18, 5);
+
+INSERT INTO tb_review (text, movie_id, user_id) VALUES ('Filme razoavel', 12, 1);
+INSERT INTO tb_review (text, movie_id, user_id) VALUES ('Gostei do enredo', 4, 5);
+INSERT INTO tb_review (text, movie_id, user_id) VALUES ('Tem alguns pontos para melhorar, mas nada que estrague o filme', 25, 1);
+
+INSERT INTO tb_review (text, movie_id, user_id) VALUES ('Goste do filme, recomendo!', 27, 1);
+INSERT INTO tb_review (text, movie_id, user_id) VALUES ('Gostei da trilha sonora', 6, 5);
+INSERT INTO tb_review (text, movie_id, user_id) VALUES ('Filme bom', 17, 1);

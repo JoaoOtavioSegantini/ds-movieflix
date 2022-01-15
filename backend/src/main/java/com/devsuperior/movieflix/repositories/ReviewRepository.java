@@ -16,4 +16,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 			+ " ON obj.movie_id = mov.id WHERE obj.user_id = :id"
 			+ " GROUP BY obj.id", nativeQuery = true)
 	List<Review> findMyReviews(@Param("id") Long id);
+	
+	@Query("SELECT obj FROM Review obj JOIN FETCH obj.movie WHERE obj IN :reviews")
+	List<Review> findMyReviews(List<Review> reviews);
 }
