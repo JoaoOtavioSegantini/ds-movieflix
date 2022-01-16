@@ -9,10 +9,34 @@ type Props = {
   showText: boolean
   children: React.ReactNode
   isReset: boolean
+  isSignUp: boolean
 }
-const Form = ({ errors, register, showText, children, isReset }: Props) => {
+const Form = ({
+  errors,
+  register,
+  showText,
+  children,
+  isReset,
+  isSignUp
+}: Props) => {
   return (
     <>
+      {isSignUp && (
+        <input
+          type="text"
+          className={`form-control d-flex ${errors.name ? 'is-invalid' : ''} `}
+          placeholder="Nome"
+          {...register('name', {
+            required: 'Campo obrigatório',
+            minLength: 15
+          })}
+        />
+      )}
+      {errors.name && (
+        <div className="invalid-feedback d-block" data-testid="username-error">
+          {errors.name.message}
+        </div>
+      )}
       <input
         type="email"
         className={`form-control d-flex ${

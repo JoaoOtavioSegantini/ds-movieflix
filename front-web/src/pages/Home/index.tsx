@@ -14,16 +14,79 @@ import ButtonLoader from '@components/ButtonLoader'
 import IconShow from '@components/IconShow'
 import Form from '@components/Form'
 import { toast } from 'react-toastify'
+// import { DeepMap, FieldError, UseFormRegister } from 'react-hook-form'
 
 export type FormState = {
   username: string
   password: string
   to: string
+  name: string
 }
 
 type LocationState = {
   from: string
 }
+
+// type Props = {
+//   errors: DeepMap<FormState, FieldError>
+//   register: UseFormRegister<FormState>
+//   showText: boolean
+//   children: React.ReactNode
+//   isReset: boolean
+//   hiddenPassword?: boolean
+// }
+
+// export const EmailPassword = (
+//   errors: Props['errors'],
+//   children: Props['children'],
+//   register: Props['register'],
+//   isReset: Props['isReset'],
+//   showText: Props['showText'],
+//   hiddenPassword = false
+// ) => ({
+//   email: {
+//     type: 'email',
+//     placeholder: 'Email',
+//     className: `form-control d-flex ${errors.username ? 'is-invalid' : ''} `,
+//     register: {
+//       ...register(isReset ? 'to' : 'username', {
+//         required: 'Campo obrigatório',
+//         pattern: {
+//           value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+//           message: 'Email inválido'
+//         }
+//       })
+//     },
+//     fieldError: errors.username ? (
+//       <div className="invalid-feedback d-block" data-testid="username-error">
+//         {errors?.username!.message}
+//       </div>
+//     ) : null,
+//     fieldReset:
+//       isReset && errors.to ? (
+//         <div className="invalid-feedback d-block" data-testid="to-error">
+//           {errors.to.message}
+//         </div>
+//       ) : null
+//   },
+//   password: {
+//     hidden: isReset || hiddenPassword,
+//     principal: (
+//       <div className="group ">
+//         <input
+//           className={`form-control col ${errors.password ? 'is-invalid' : ''} `}
+//           type={showText ? 'text' : 'password'}
+//           placeholder="Senha"
+//           {...register('password', {
+//             required: 'Campo obrigatório'
+//           })}
+//         />
+
+//         {children}
+//       </div>
+//     )
+//   }
+// })
 
 const Home = () => {
   const [values, setValues] = useState({
@@ -42,6 +105,7 @@ const Home = () => {
   const history = useHistory()
   const location = useLocation<LocationState>()
   const [isReset, setIsReset] = useState(false)
+  const [isSignUp, setIsSignUp] = useState(false)
 
   const handleClickPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword })
@@ -73,6 +137,33 @@ const Home = () => {
       })
   }
 
+  const onSignup = (data: FormState) => {
+    setIsLoading(true)
+    setHasError(false)
+    setIsLoading(true)
+    makeRequest({
+      url: '/users',
+      method: 'POST',
+      data: {
+        email: data.username,
+        name: data.name,
+        password: data.password,
+        roles: [{ id: 1 }]
+      }
+    })
+      .then(() => {
+        setIsLoading(false)
+        toast.success('Cadastro efetuado com sucesso!')
+      })
+      .catch((err) => {
+        if (err.response.data.message === '') {
+          toast.error(err.response.data.error)
+        } else {
+          toast.error(err.response?.data.message)
+        }
+        setIsLoading(false)
+      })
+  }
   const onReset = (data: FormState) => {
     setHasError(false)
     setIsLoading(true)
@@ -104,15 +195,20 @@ const Home = () => {
         </div>
         <form
           className="col-6 login-base"
-          onSubmit={handleSubmit(!isReset ? onSubmit : onReset)}
+          onSubmit={handleSubmit(
+            isSignUp ? onSignup : isReset ? onReset : onSubmit
+          )}
         >
-          <h1 className="login-title">{isReset ? 'RESET' : 'LOGIN'}</h1>
+          <h1 className="login-title">
+            {isReset ? 'RECUPERAR' : isSignUp ? 'CADASTRO' : 'LOGIN'}
+          </h1>
           {hasError && <Alert onClick={() => setHasError(false)} />}
           <Form
             errors={errors}
             register={register}
             showText={values.showPassword}
             isReset={isReset}
+            isSignUp={isSignUp}
           >
             <IconShow
               errors={!!errors.password}
@@ -128,6 +224,8 @@ const Home = () => {
               errors.password = undefined
               errors.to = undefined
               errors.username = undefined
+              errors.name = undefined
+              setIsSignUp(false)
             }}
             className="reset-link"
           >
@@ -138,13 +236,23 @@ const Home = () => {
               isLoading={isLoading}
               disabled={!!errors.password || !!errors.username}
               isReset={isReset}
+              isSignUp={isSignUp}
             />
             <div className="btn-icon-content" data-testid="arrowIcon">
               <ArrowIcon />
             </div>
           </div>
           <a className="sign-btn">
-            Não tem Cadastro?&nbsp;&nbsp;&nbsp; <span>CADASTRAR</span>
+            {isSignUp ? 'Já tem Cadastro?' : 'Não tem Cadastro?'}
+            &nbsp;&nbsp;&nbsp;
+            <span
+              onClick={() => {
+                setIsSignUp(!isSignUp)
+                setIsReset(false)
+              }}
+            >
+              {isSignUp ? 'LOGIN' : 'CADASTRAR'}
+            </span>
           </a>
         </form>
       </div>

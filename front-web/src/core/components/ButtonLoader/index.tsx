@@ -4,9 +4,10 @@ type Props = {
   isLoading: boolean
   disabled: boolean
   isReset: boolean
+  isSignUp: boolean
 }
 
-const ButtonLoader = ({ isLoading, disabled, isReset }: Props) => {
+const ButtonLoader = ({ isLoading, disabled, isReset, isSignUp }: Props) => {
   return isLoading ? (
     <button className="btn-icon btn-primary row" type="button" disabled>
       <span
@@ -20,7 +21,9 @@ const ButtonLoader = ({ isLoading, disabled, isReset }: Props) => {
     </button>
   ) : (
     <button className="btn-icon btn-primary" disabled={disabled}>
-      <h5>{isReset ? 'ENVIAR TOKEN' : 'LOGAR'}</h5>
+      <h5>
+        {(isReset && 'ENVIAR TOKEN') || (isSignUp && 'CADASTRAR') || 'LOGAR'}
+      </h5>
     </button>
   )
 }
