@@ -29,6 +29,7 @@ const Navbar = () => {
     const authData = JSON.parse(localStorage.getItem('authData')!)
     const name = authData ? authData.userName : ''
     setCurretUser({ ...currentUser, email: user_name, name })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location, user_name])
 
   const handleLogout = (event: React.MouseEvent<HTMLDivElement>) => {

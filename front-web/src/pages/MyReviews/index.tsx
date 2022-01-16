@@ -30,8 +30,23 @@ const MyReviewsPage = () => {
 
   const member = isAllowedByRole(['MEMBER'])
 
-  const removeAvaliation = () => {
+  const removeAvaliation = (id: number, title: string) => {
     if (!member) return
+
+    const confirm = window.confirm(
+      `Tem certeza que deseja remover a review do filme ${title}`
+    )
+    if (!confirm) return
+    makePrivateRequest({ url: `/reviews/${id}`, method: 'DELETE' })
+      .then(() => {
+        const newReviews = myReview!.filter((review) => review.id != id)
+        setMyReview(newReviews as [MyReviews])
+        toast.info('Review removida com sucesso!')
+      })
+      .finally(() => {
+        setLoad(false)
+      })
+      .catch((err) => toast.error(err.message))
   }
   const handleCloseModal = () => {
     setError(false)
@@ -51,7 +66,11 @@ const MyReviewsPage = () => {
           <h1>Minhas Avaliações</h1>
           <div className="movie-details-review">
             {myReview?.map((card) => (
-              <CardReview review={card} key={card.id} />
+              <CardReview
+                onClick={(id, title) => removeAvaliation(id, title)}
+                review={card}
+                key={card.id}
+              />
             ))}
           </div>
         </>

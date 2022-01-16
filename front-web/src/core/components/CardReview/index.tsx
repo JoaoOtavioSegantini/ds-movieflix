@@ -8,9 +8,10 @@ import { ReactComponent as Exclude } from '@images/garbage.svg'
 
 type ReviewBase = {
   review: MyReviews
+  onClick: (id: number, title: string) => void
 }
 
-const CardReview = ({ review }: ReviewBase) => (
+const CardReview = ({ review, onClick }: ReviewBase) => (
   <div className="card mb-3 card-my-review" style={{ maxWidth: '100%' }}>
     <div className="row no-gutters">
       <div className="col-md-3">
@@ -39,6 +40,7 @@ const CardReview = ({ review }: ReviewBase) => (
             </Link>
             <Link
               to="#"
+              onClick={() => onClick(review.id, review.title)}
               className="btn settings-btn"
               style={{ height: 'auto' }}
             >
