@@ -28,6 +28,7 @@ import com.devsuperior.movieflix.repositories.RoleRepository;
 import com.devsuperior.movieflix.repositories.UserRepository;
 import com.devsuperior.movieflix.services.exceptions.DataBaseException;
 import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
+import com.devsuperior.movieflix.services.exceptions.UnauthorizedException;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -72,6 +73,9 @@ public class UserService implements UserDetailsService {
 
 		entity.getRoles().clear();
 		for (RoleDTO roleDto : dto.getRoles()) {
+			if(roleDto.getId() != 1L) {
+				throw new UnauthorizedException("Usuário sem permissão para este serviço");
+			}
 			Role role = roleRepository.getOne(roleDto.getId());
 			entity.getRoles().add(role);
 		}
