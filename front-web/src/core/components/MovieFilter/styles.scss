@@ -41,6 +41,7 @@
   .movie-genres-select__option:hover {
     background-color: var(--card-background);
     color: var(--primary-color);
+    cursor: pointer;
   }
   .movie-genres-select__placeholder {
     color: var(--pure-white);
@@ -49,6 +50,7 @@
   .movie-genres-select__indicator {
     color: var(--grey);
     background-color: var(--card-background);
+    cursor: pointer;
     &:hover {
       color: var(--pure-white);
     }
