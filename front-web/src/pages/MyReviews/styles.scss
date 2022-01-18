@@ -29,5 +29,14 @@
 }
 
 @media (max-width: 576px) {
+.my-reviews-container {
+  max-width: 100%;
 
+  & h1 {
+    top: 25%;
+    font-size: 30px;
+    line-height: 48px;
+    left: 70%;
+  }
+}
 }

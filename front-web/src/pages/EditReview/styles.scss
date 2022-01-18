@@ -71,3 +71,36 @@
     padding-bottom: 15px;
   }
 }
+
+@media (max-width: 576px) {
+  .review-edit-container {
+    max-width: 95% !important;
+  }
+  .btn.rev-btn {
+    margin-left: 2px;
+  }
+  .btn.rev-btn:first-child svg {
+    margin-left: 0 !important;
+    margin-right: 2px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .rev-user svg {
+    width: 22px;
+    height: 15px;
+  }
+  .my-reviews-container h2 {
+    font-size: 30px;
+    line-height: 48px;
+  }
+
+  .my-reviews-container h3 {
+    font-size: 16px;
+    line-height: 29px;
+  }
+
+  .btn.rev-btn p, a {
+    font-size: 10px;
+  }
+}
