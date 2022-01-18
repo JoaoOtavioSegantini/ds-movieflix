@@ -77,7 +77,7 @@ const Navbar = () => {
                     onClick={() => setDrawer(false)}
                   >
                     <UserDropdownMenu color={drawer ? '#ffffff' : '#9e9e9e'} />
-                    My account
+                    &nbsp; Minha conta
                   </Link>
                 </li>
                 {isMemberOrAdmin && (
@@ -111,7 +111,7 @@ const Navbar = () => {
                       setDrawer(false)
                     }}
                   >
-                    <Logout color={drawer ? '#ffffff' : '#9e9e9e'} /> Sign Out
+                    <Logout color={drawer ? '#ffffff' : '#9e9e9e'} /> Sair
                   </button>
                 </li>
               </ul>

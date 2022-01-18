@@ -8,6 +8,7 @@ import PrivateRoute from '@components/Routes/PrivateRoute'
 import { isAuthenticated } from '@utils/auth'
 import MyReviewsPage from './pages/MyReviews'
 import EditReview from './pages/EditReview'
+import Reset from './pages/Reset'
 
 const Routes = () => {
   return (
@@ -50,6 +51,16 @@ const Routes = () => {
         <PrivateRoute path="/movies/:movieId">
           <MovieDetails />
         </PrivateRoute>
+        <Route
+          path="/reset-password"
+          render={() => {
+            return isAuthenticated() ? (
+              <Redirect to="/movies" exact />
+            ) : (
+              <Reset />
+            )
+          }}
+        />
       </Switch>
     </Router>
   )
