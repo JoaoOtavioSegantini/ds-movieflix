@@ -19,7 +19,11 @@ import menu from '@images/menu.svg'
 import Admin from '@images/admin'
 
 const Navbar = () => {
-  const [currentUser, setCurretUser] = useState({ email: '', name: '' })
+  const [currentUser, setCurretUser] = useState({
+    email: '',
+    name: '',
+    mediaMatch: false
+  })
   const [drawer, setDrawer] = useState(false)
   const { user_name } = getAccessTokenDecoded()
   const isValid = isTokenValid()
@@ -27,12 +31,17 @@ const Navbar = () => {
   const isAdmin = isAllowedByRole(['ROLE_ADMIN'])
   const isMemberOrAdmin = isAllowedByRole(['MEMBER', 'ROLE_ADMIN'])
 
+  window.addEventListener('resize', () => {
+    const md = document.documentElement.clientWidth < 576
+    setCurretUser({ ...currentUser, mediaMatch: md })
+  })
+
   useEffect(() => {
     const authData = JSON.parse(localStorage.getItem('authData')!)
     const name = authData ? authData.userName : ''
     setCurretUser({ ...currentUser, email: user_name, name })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location, user_name])
+  }, [location, user_name, currentUser.mediaMatch])
 
   const handleLogout = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault()
@@ -42,16 +51,26 @@ const Navbar = () => {
   return (
     <nav className="row bg-primary main-nav navbar-expand-lg navbar-dark bg-primary">
       <div className="navbar">
-        <Link to="/" className="logo-text col-3">
+        <Link
+          to="/"
+          className="logo-text col-3"
+          style={
+            !isValid && currentUser.mediaMatch
+              ? { justifyContent: 'center', marginLeft: 'calc(100% - 75vw)' }
+              : {}
+          }
+        >
           MovieFlix
         </Link>
-        <button
-          className="menu-mobile-btn"
-          type="button"
-          onClick={() => setDrawer(!drawer)}
-        >
-          <img src={menu} alt="Mobile menu" />
-        </button>
+        {isValid && (
+          <button
+            className="menu-mobile-btn"
+            type="button"
+            onClick={() => setDrawer(!drawer)}
+          >
+            <img src={menu} alt="Mobile menu" />
+          </button>
+        )}
         {isValid && (
           <div
             className={

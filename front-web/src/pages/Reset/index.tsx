@@ -9,6 +9,7 @@ import { makeRequest } from '@utils/request'
 import Alert from '@components/Alert'
 import ButtonLoader from '@components/ButtonLoader'
 import { toast } from 'react-toastify'
+import IconShow from '@components/IconShow'
 
 export type FormState = {
   password: string
@@ -18,7 +19,8 @@ export type FormState = {
 const Reset = () => {
   const [values, setValues] = useState({
     password: '',
-    showPassword: false
+    showPassword: false,
+    showPassword2: false
   })
 
   const {
@@ -30,8 +32,6 @@ const Reset = () => {
 
   const [hasError, setHasError] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [isReset, setIsReset] = useState(false)
-  const [isSignUp, setIsSignUp] = useState(false)
   const history = useHistory()
 
   const password = useRef({})
@@ -40,7 +40,9 @@ const Reset = () => {
   const handleClickPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword })
   }
-
+  const handleClickPassword2 = () => {
+    setValues({ ...values, showPassword2: !values.showPassword2 })
+  }
   const handleMouseDownPassword = (event: React.MouseEvent) => {
     event.preventDefault()
   }
@@ -81,6 +83,7 @@ const Reset = () => {
           <h1 className="login-title">RESETAR SENHA</h1>
           {hasError && <Alert onClick={() => setHasError(false)} />}
           {/* FORMULÁRIOS */}
+
           <input
             className={`form-control col ${
               errors.password ? 'is-invalid' : ''
@@ -99,12 +102,19 @@ const Reset = () => {
               {errors.password.message}
             </div>
           )}
+          <IconShow
+            errors={!!errors.password}
+            errorPasswordMessage={errors?.password?.message}
+            showPassword={values.showPassword}
+            handleClickPassword={handleClickPassword}
+            handleMouseDownPassword={handleMouseDownPassword}
+          />
 
           <input
             className={`form-control col ${
               errors.password ? 'is-invalid' : ''
             } `}
-            type={values.showPassword ? 'text' : 'password'}
+            type={values.showPassword2 ? 'text' : 'password'}
             placeholder="Confirmar senha"
             {...register('confirm', {
               required: 'Campo obrigatório',
@@ -117,6 +127,13 @@ const Reset = () => {
               {errors.confirm.message}
             </div>
           )}
+          <IconShow
+            errors={!!errors.confirm}
+            errorPasswordMessage={errors?.confirm?.message}
+            showPassword={values.showPassword2}
+            handleClickPassword={handleClickPassword2}
+            handleMouseDownPassword={handleMouseDownPassword}
+          />
           <Link className="reset-link" to="..">
             Retornar a tela de login
           </Link>
@@ -124,8 +141,6 @@ const Reset = () => {
             <ButtonLoader
               isLoading={isLoading}
               disabled={!!errors.password}
-              isReset={isReset}
-              isSignUp={isSignUp}
               change
             />
             <div className="btn-icon-content" data-testid="arrowIcon">

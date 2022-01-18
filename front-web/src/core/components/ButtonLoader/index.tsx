@@ -3,8 +3,8 @@ import './styles.scss'
 type Props = {
   isLoading: boolean
   disabled: boolean
-  isReset: boolean
-  isSignUp: boolean
+  isReset?: boolean
+  isSignUp?: boolean
   change?: boolean
 }
 
