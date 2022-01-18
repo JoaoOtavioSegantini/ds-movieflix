@@ -126,7 +126,7 @@ const Navbar = () => {
                   <button
                     className="dropdown-item"
                     onClick={() => {
-                      logout
+                      logout()
                       setDrawer(false)
                     }}
                   >
