@@ -238,6 +238,10 @@ const Home = () => {
               onClick={() => {
                 setIsSignUp(!isSignUp)
                 setIsReset(false)
+                errors.password = undefined
+                errors.to = undefined
+                errors.username = undefined
+                errors.name = undefined
               }}
             >
               {isSignUp ? 'LOGIN' : 'CADASTRAR'}
