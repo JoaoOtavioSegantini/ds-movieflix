@@ -39,7 +39,7 @@ public class Movie implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL , mappedBy = "movie")	
 	private Set<Review> reviews = new HashSet<>();
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "genre_id")
 	private Genre genre;
 		
