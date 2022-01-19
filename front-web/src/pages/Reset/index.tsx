@@ -47,7 +47,7 @@ const Reset = () => {
     event.preventDefault()
   }
 
-  const onReset = (data: FormState) => {
+  const onChangePass = (data: FormState) => {
     const params = new URLSearchParams(window.location.search)
     const token = params.get('token')
     setHasError(false)
@@ -79,7 +79,10 @@ const Reset = () => {
           </h1>
           <MainImage className="main-image" data-testid="main-image" />
         </div>
-        <form className="col-6 login-base" onSubmit={handleSubmit(onReset)}>
+        <form
+          className="col-6 login-base"
+          onSubmit={handleSubmit(onChangePass)}
+        >
           <h1 className="login-title">RESETAR SENHA</h1>
           {hasError && <Alert onClick={() => setHasError(false)} />}
           {/* FORMULÁRIOS */}

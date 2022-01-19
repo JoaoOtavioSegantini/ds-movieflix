@@ -27,7 +27,7 @@ const ButtonLoader = ({
       </span>
     </button>
   ) : (
-    <button className="btn-icon btn-primary" disabled={disabled}>
+    <button className="btn-icon btn-primary" type="submit" disabled={disabled}>
       <h5>
         {isReset
           ? 'ENVIAR TOKEN'

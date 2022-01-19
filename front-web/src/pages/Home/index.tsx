@@ -119,68 +119,62 @@ const Home = () => {
 
   const onSubmit = (data: FormState) => {
     setIsLoading(true)
-    makeLogin(data)
-      .then((response) => {
-        setHasError(false)
+    isSignUp
+      ? makeRequest({
+          url: '/users',
+          method: 'POST',
+          data: {
+            email: data.username,
+            name: data.name,
+            password: data.password,
+            roles: [{ id: 1 }]
+          }
+        })
+          .then(() => {
+            setIsLoading(false)
+            toast.success('Cadastro efetuado com sucesso!')
+          })
+          .catch((err) => {
+            if (err.response.data.message === '') {
+              toast.error(err.response.data.error)
+            } else {
+              toast.error(err.response?.data.message)
+            }
+            setIsLoading(false)
+          })
+      : isReset
+      ? makeRequest({
+          url: '/emails',
+          method: 'POST',
+          data: { to: data.to },
+          headers: { 'content-type': 'application/json' }
+        })
+          .then(() => {
+            setIsLoading(false)
+            toast.success(
+              'Token de reset enviado, por favor verifique seu email.'
+            )
+          })
+          .catch((err) => {
+            toast.error(err.response?.data.message)
+            setIsLoading(false)
+          })
+      : makeLogin(data)
+          .then((response) => {
+            setHasError(false)
 
-        setIsLoading(false)
-        saveSessionData(response.data)
-        history.replace(from)
-        setTimeout(() => {
-          toast.success(`Bem vindo de volta ${response.data.userName}!`)
-        }, 1500)
-      })
-      .catch((err) => {
-        toast.error(err)
-        setHasError(true)
-        setIsLoading(false)
-      })
-  }
-
-  const onSignup = (data: FormState) => {
-    setIsLoading(true)
-    setHasError(false)
-    setIsLoading(true)
-    makeRequest({
-      url: '/users',
-      method: 'POST',
-      data: {
-        email: data.username,
-        name: data.name,
-        password: data.password,
-        roles: [{ id: 1 }]
-      }
-    })
-      .then(() => {
-        setIsLoading(false)
-        toast.success('Cadastro efetuado com sucesso!')
-      })
-      .catch((err) => {
-        if (err.response.data.message === '') {
-          toast.error(err.response.data.error)
-        } else {
-          toast.error(err.response?.data.message)
-        }
-        setIsLoading(false)
-      })
-  }
-  const onReset = (data: FormState) => {
-    setHasError(false)
-    setIsLoading(true)
-    makeRequest({
-      url: '/emails',
-      method: 'POST',
-      data: { to: data.to },
-      headers: { 'content-type': 'application/json' }
-    })
-      .then(() => {
-        setIsLoading(false)
-        toast.success('Token de reset enviado, por favor verifique seu email.')
-      })
-      .catch((err) => {
-        toast.error(err.response?.data.message)
-        setIsLoading(false)
-      })
+            setIsLoading(false)
+            saveSessionData(response.data)
+            history.replace(from)
+            setTimeout(() => {
+              toast.success(`Bem vindo de volta ${response.data.userName}!`)
+            }, 1500)
+          })
+          .catch((err) => {
+            toast.error(err)
+            setHasError(true)
+            setIsLoading(false)
+          })
   }
 
   return (
@@ -193,12 +187,7 @@ const Home = () => {
           </h1>
           <MainImage className="main-image" data-testid="main-image" />
         </div>
-        <form
-          className="col-6 login-base"
-          onSubmit={handleSubmit(
-            isSignUp ? onSignup : isReset ? onReset : onSubmit
-          )}
-        >
+        <form className="col-6 login-base" onSubmit={handleSubmit(onSubmit)}>
           <h1 className="login-title">
             {isReset ? 'RECUPERAR' : isSignUp ? 'CADASTRO' : 'LOGIN'}
           </h1>
