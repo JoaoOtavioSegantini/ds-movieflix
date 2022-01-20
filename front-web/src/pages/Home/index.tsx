@@ -221,9 +221,6 @@ const Home = () => {
             onClick={() => {
               setIsReset(!isReset)
               errors.password = undefined
-              errors.to = undefined
-              errors.username = undefined
-              errors.name = undefined
               setIsSignUp(false)
             }}
             className="reset-link"
