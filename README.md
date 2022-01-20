@@ -9,14 +9,21 @@ This is an application developed in a second version of Bootcamp called DevSuper
 - Joao (ADMiN): => email: joao@gmail.com, senha: 123456
 
 ## Layout web
+
+### Login
 ![Login](https://github.com/JoaoOtavioSegantini/assets/blob/main/raw/bootdev/movieflix-login.jpg)
 
+### Edit review page
 ![Edit page](https://github.com/JoaoOtavioSegantini/assets/blob/main/raw/bootdev/movieflix-edit.jpg)
 
-![Main Page](https://github.com/JoaoOtavioSegantini/assets/blob/main/raw/bootdev/main-page.png)
+### Main page
+![Main Page](https://github.com/JoaoOtavioSegantini/assets/blob/main/raw/bootdev/movieflix-main-page.jpg)
 
+### My reviews page
 ![My Reviews Page](https://github.com/JoaoOtavioSegantini/assets/blob/main/raw/bootdev/movieflix-reviews.jpg)
 
+### My reviews when reviews list is empty
 ![My Reviews when reviews list is empty](https://github.com/JoaoOtavioSegantini/assets/blob/main/raw/bootdev/movieflix-empty.jpg)
 
+### Reset page
 ![Reset page](https://github.com/JoaoOtavioSegantini/assets/blob/main/raw/bootdev/movieflix-reset.jpg)
