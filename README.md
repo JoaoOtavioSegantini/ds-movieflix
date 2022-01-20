@@ -29,7 +29,11 @@ This is an application developed in a second version of Bootcamp called DevSuper
 ![Reset page](https://github.com/JoaoOtavioSegantini/assets/blob/main/raw/bootdev/movieflix-reset.jpg)
 
 ### Review page 1
-![Reset page](https://github.com/JoaoOtavioSegantini/assets/blob/main/raw/bootdev/movieflix-save-review.jpg)
+![Review page1](https://github.com/JoaoOtavioSegantini/assets/blob/main/raw/bootdev/movieflix-save-review.jpg)
 
 ### Review page 2
-![Reset page](https://github.com/JoaoOtavioSegantini/assets/blob/main/raw/bootdev/movieflix-savereview2.jpg)
+![Review page](https://github.com/JoaoOtavioSegantini/assets/blob/main/raw/bootdev/movieflix-savereview2.jpg)
+
+### Email design
+![Email design](https://github.com/JoaoOtavioSegantini/assets/blob/main/raw/bootdev/email-design.jpg)
+
