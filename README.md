@@ -1,0 +1,22 @@
+# MovieFlix
+This is an application developed in a second version of Bootcamp called DevSuperior as a challenge to complete the event. The MovieFlix system consists of a movie bank, which can be listed and rated by users. 
+
+## Dados de acesso
+
+- Alex (MEMBER): => email: alex@gmail.com, senha: 123456
+- Bob (VISITOR): => email: bob@gmail.com, senha: 123456,
+- Ana (MEMBER): => email: ana@gmail.com, senha: 123456,
+- Joao (ADMiN): => email: joao@gmail.com, senha: 123456
+
+## Layout web
+![Login](https://github.com/JoaoOtavioSegantini/assets/blob/main/raw/bootdev/movieflix-login.jpg)
+
+![Edit page](https://github.com/JoaoOtavioSegantini/assets/blob/main/raw/bootdev/movieflix-edit.jpg)
+
+![Main Page](https://github.com/JoaoOtavioSegantini/assets/blob/main/raw/bootdev/main-page.png)
+
+![My Reviews Page](https://github.com/JoaoOtavioSegantini/assets/blob/main/raw/bootdev/movieflix-reviews.jpg)
+
+![My Reviews when reviews list is empty](https://github.com/JoaoOtavioSegantini/assets/blob/main/raw/bootdev/movieflix-empty.jpg)
+
+![Reset page](https://github.com/JoaoOtavioSegantini/assets/blob/main/raw/bootdev/movieflix-reset.jpg)
