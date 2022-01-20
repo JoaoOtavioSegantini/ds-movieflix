@@ -72,6 +72,7 @@ const MyReviewsPage = () => {
             <>
               <h2>Você ainda não fez nenhuma avaliação</h2>
               <img
+                className="empty"
                 src={animal}
                 alt="um gato com uma expressão de curiosidade"
               />
