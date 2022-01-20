@@ -11,6 +11,8 @@ import CardReview from '@components/CardReview'
 import { Modal } from '@components/InfoModal'
 import ReviewsLoader from '@components/Loaders/ReviewsLoader'
 
+import animal from '@images/animal.svg'
+
 const MyReviewsPage = () => {
   const [myReview, setMyReview] = useState<[MyReviews]>()
   const [load, setLoad] = useState(false)
@@ -62,8 +64,19 @@ const MyReviewsPage = () => {
         </>
       ) : (
         <>
+          {/* TODO: Fazer modal personalizado*/}
           {error && <Modal close={handleCloseModal} />}
-          <h1>Minhas Avaliações</h1>
+          {myReview && myReview?.length > 0 ? (
+            <h1>Minhas Avaliações</h1>
+          ) : (
+            <>
+              <h2>Você ainda não fez nenhuma avaliação</h2>
+              <img
+                src={animal}
+                alt="um gato com uma expressão de curiosidade"
+              />
+            </>
+          )}
           <div className="movie-details-review">
             {myReview?.map((card) => (
               <CardReview
