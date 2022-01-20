@@ -21,80 +21,142 @@ const Form = ({
 }: Props) => {
   return (
     <>
-      {isSignUp && (
-        <input
-          type="text"
-          className={`form-control d-flex ${errors.name ? 'is-invalid' : ''} `}
-          placeholder="Nome"
-          {...register('name', {
-            required: 'Campo obrigatório',
-            minLength: 8
-          })}
-        />
-      )}
-      {errors.name && (
-        <div className="invalid-feedback d-block" data-testid="username-error">
-          {errors.name.message}
-        </div>
-      )}
-
-      {isReset ? (
-        <input
-          type="email"
-          className={`form-control d-flex ${errors.to ? 'is-invalid' : ''} `}
-          placeholder="Email"
-          {...register('to', {
-            required: 'Campo obrigatório',
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: 'Email inválido'
-            }
-          })}
-        />
-      ) : (
-        <input
-          type="email"
-          className={`form-control d-flex ${
-            errors.username ? 'is-invalid' : ''
-          } `}
-          placeholder="Email"
-          {...register('username', {
-            required: 'Campo obrigatório',
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: 'Email inválido'
-            }
-          })}
-        />
-      )}
-      {errors.username && (
-        <div className="invalid-feedback d-block" data-testid="username-error">
-          {errors.username.message}
-        </div>
-      )}
-
-      {isReset && errors.to && (
-        <div className="invalid-feedback d-block" data-testid="to-error">
-          {errors.to.message}
-        </div>
-      )}
-      {!isReset ? (
-        <div className="group ">
+      {isSignUp ? (
+        <>
           <input
-            className={`form-control col ${
-              errors.password ? 'is-invalid' : ''
+            type="text"
+            className={`form-control d-flex ${
+              errors.name ? 'is-invalid' : ''
             } `}
-            type={showText ? 'text' : 'password'}
-            placeholder="Senha"
-            {...register('password', {
-              required: 'Campo obrigatório'
+            placeholder="Nome"
+            {...register('name', {
+              required: 'Campo obrigatório',
+              minLength: 8
+            })}
+          />
+          {errors.name && (
+            <div
+              className="invalid-feedback d-block"
+              data-testid="username-error"
+            >
+              {errors.name.message}
+            </div>
+          )}
+          <input
+            type="email"
+            className={`form-control d-flex ${
+              errors.username ? 'is-invalid' : ''
+            } `}
+            placeholder="Email"
+            {...register('username', {
+              required: 'Campo obrigatório',
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: 'Email inválido'
+              }
+            })}
+          />
+          {errors.username && (
+            <div
+              className="invalid-feedback d-block"
+              data-testid="username-error"
+            >
+              {errors.username.message}
+            </div>
+          )}
+          <div className="group ">
+            <input
+              className={`form-control col ${
+                errors.password ? 'is-invalid' : ''
+              } `}
+              type={showText ? 'text' : 'password'}
+              placeholder="Senha"
+              {...register('password', {
+                required: 'Campo obrigatório'
+              })}
+            />
+            {errors.password && (
+              <div
+                className="invalid-feedback d-block"
+                data-testid="username-error"
+              >
+                {errors.password.message}
+              </div>
+            )}
+            {children}
+          </div>
+        </>
+      ) : isReset ? (
+        <>
+          <input
+            type="email"
+            className={`form-control d-flex ${errors.to ? 'is-invalid' : ''} `}
+            placeholder="Email"
+            {...register('to', {
+              required: 'Campo obrigatório',
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: 'Email inválido'
+              }
+            })}
+          />
+          {errors.to && (
+            <div
+              className="invalid-feedback d-block"
+              data-testid="username-error"
+            >
+              {errors.to.message}
+            </div>
+          )}
+        </>
+      ) : (
+        <>
+          <input
+            type="email"
+            className={`form-control d-flex ${
+              errors.username ? 'is-invalid' : ''
+            } `}
+            placeholder="Email"
+            {...register('username', {
+              required: 'Campo obrigatório',
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: 'Email inválido'
+              }
             })}
           />
 
-          {children}
-        </div>
-      ) : (
-        <></>
+          {errors.username && (
+            <div
+              className="invalid-feedback d-block"
+              data-testid="username-error"
+            >
+              {errors.username.message}
+            </div>
+          )}
+
+          <div className="group ">
+            <input
+              className={`form-control col ${
+                errors.password ? 'is-invalid' : ''
+              } `}
+              type={showText ? 'text' : 'password'}
+              placeholder="Senha"
+              {...register('password', {
+                required: 'Campo obrigatório'
+              })}
+            />
+            {errors.password && (
+              <div
+                className="invalid-feedback d-block"
+                data-testid="username-error"
+              >
+                {errors.password.message}
+              </div>
+            )}
+            {children}
+          </div>
+        </>
       )}
     </>
   )
