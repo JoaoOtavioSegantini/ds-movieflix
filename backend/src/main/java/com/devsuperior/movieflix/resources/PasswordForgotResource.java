@@ -71,7 +71,7 @@ public class PasswordForgotResource {
 		Map<String, Object> model = new HashMap<>();
 		model.put("expiryDate", expiryDate);
 		model.put("user", user);
-		
+		model.put("url", url);
 		model.put("resetUrl", url + "/reset-password?token=" + token.getToken());
 		dto.setModel(model);
 		emailService.sendEmail(dto);
