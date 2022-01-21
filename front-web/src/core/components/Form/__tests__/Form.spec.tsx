@@ -12,7 +12,13 @@ describe('<Form />', () => {
     const register = jest.fn()
 
     render(
-      <Form errors={errors} register={register} showText>
+      <Form
+        errors={errors}
+        register={register}
+        showText
+        isReset={false}
+        isSignUp={false}
+      >
         <div data-testid="test">Test Form</div>
       </Form>
     )
@@ -33,7 +39,13 @@ describe('<Form />', () => {
     const register = jest.fn()
 
     render(
-      <Form errors={errors} register={register} showText={false}>
+      <Form
+        errors={errors}
+        register={register}
+        showText={false}
+        isReset={false}
+        isSignUp={false}
+      >
         <div data-testid="test">Test Form</div>
       </Form>
     )

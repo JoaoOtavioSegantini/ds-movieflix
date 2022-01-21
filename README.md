@@ -5,8 +5,9 @@ This is an application developed in a second version of Bootcamp called DevSuper
 
 - Alex (MEMBER): => email: alex@gmail.com, senha: 123456
 - Bob (VISITOR): => email: bob@gmail.com, senha: 123456,
+- Maria (VISITOR): => email: maria@gmail.com, senha: 123456,
 - Ana (MEMBER): => email: ana@gmail.com, senha: 123456,
-- Joao (ADMiN): => email: joao@gmail.com, senha: 123456
+- Joao (ADMIN): => email: joao@gmail.com, senha: 123456
 
 ## Layout web
 

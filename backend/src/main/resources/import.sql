@@ -17,7 +17,7 @@ INSERT INTO tb_role (authority) VALUES ('ROLE_ADMIN');
 INSERT INTO tb_user (name, email, password) VALUES ('Alex Brown', 'alex@gmail.com', '$2a$10$HSfDbwxcMCQs3xVVSDWYwu32/uZ4jgTWVz.hU3W8APxb9Z4FYf0O6');
 INSERT INTO tb_user (name, email, password) VALUES ('Bob Brown', 'bob@gmail.com', '$2a$10$4cPsrVtO3wmxDLifofRPked1mO12aj49eM0jDoykfOQ.n6cPHN3ju');
 INSERT INTO tb_user (name, email, password) VALUES ('Maria', 'maria@gmail.com', '$2a$10$2ppHgi1XTTjYSgbQri.SBeV77t2eWdUaqPrrB7hELKfU8381PXzv2');
-INSERT INTO tb_user (name, email, password) VALUES ('João Otávio', 'joaossmp@gmail.com', '$2a$10$a0xXM7es.VsZjCGFUz9DOOYlpNYcBwE/nX/Ew8fLXEeWT6pnyqqvm');
+INSERT INTO tb_user (name, email, password) VALUES ('João Otávio', 'joao@gmail.com', '$2a$10$a0xXM7es.VsZjCGFUz9DOOYlpNYcBwE/nX/Ew8fLXEeWT6pnyqqvm');
 INSERT INTO tb_user (name, email, password) VALUES ('Ana Carla', 'ana@gmail.com', '$2a$10$eBQbNsFz7trzcw1xDuF0zOudQUMNih4Q4YQmry346bORYz2KeWFny');
 
 INSERT INTO tb_user_role (user_id, role_id)  VALUES (1, 2);
