@@ -23,13 +23,13 @@ export type Role = {
   authority: Authority;
 };
 
-interface Review {
+export interface Review {
   id: number;
   text: string;
   user: User;
 }
 
-interface Movie {
+export interface Movie {
   id: number;
   title: string;
   subTitle: string;
@@ -65,7 +65,9 @@ const MovieCard: React.FC<Movie> = ({
         <TouchableOpacity
           activeOpacity={0.8}
           style={theme.buttonForDetails}
-          onPress={() => navigation.navigate("MovieDetails" as never)}
+          onPress={() =>
+            navigation.navigate("MovieDetails" as never, id as never)
+          }
         >
           <Text style={text.forDetailsText}>Ver detalhes</Text>
         </TouchableOpacity>
