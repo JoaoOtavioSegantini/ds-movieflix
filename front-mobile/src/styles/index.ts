@@ -10,6 +10,7 @@ const colors = {
   black: "#000",
   detailsText: "#9E9E9E",
   arrow: "#937d1c",
+  subTitleDetail: "#CDCDCD",
 };
 
 const text = StyleSheet.create({
@@ -38,6 +39,44 @@ const text = StyleSheet.create({
     letterSpacing: -0.2,
     alignItems: "center",
     paddingHorizontal: "24%",
+  },
+  title: {
+    marginLeft: 15,
+    marginTop: 20,
+    fontStyle: "normal",
+    fontWeight: "bold",
+    fontSize: 18,
+    lineHeight: 25,
+    letterSpacing: -0.2,
+    color: colors.white,
+  },
+  year: {
+    marginLeft: 15,
+    fontStyle: "normal",
+    fontWeight: "bold",
+    fontSize: 14,
+    lineHeight: 19,
+    letterSpacing: -0.2,
+    color: colors.primary,
+  },
+  subTitle: {
+    marginLeft: 15,
+    fontStyle: "normal",
+    fontWeight: "normal",
+    fontSize: 16,
+    lineHeight: 22,
+    letterSpacing: -0.2,
+    color: colors.subTitleDetail,
+  },
+  forDetailsText: {
+    fontStyle: "normal",
+    fontWeight: "bold",
+    fontSize: 14,
+    lineHeight: 19,
+    textAlign: "center",
+    letterSpacing: -0.2,
+    textTransform: "uppercase",
+    color: colors.white,
   },
 });
 
@@ -81,6 +120,28 @@ const theme = StyleSheet.create({
     borderBottomRightRadius: 10,
     alignItems: "center",
     justifyContent: "center",
+  },
+  scrollContainer: {
+    padding: 10,
+    backgroundColor: colors.backgroundColor,
+  },
+  movieCard: {
+    width: "95%",
+    backgroundColor: colors.secondary,
+    marginTop: 18,
+    paddingTop: 18,
+    paddingBottom: 20,
+    marginHorizontal: "2%",
+    borderRadius: 10,
+  },
+  buttonForDetails: {
+    border: "1px solid #E1E1E1",
+    borderRadius: 10,
+    width: "90%",
+    marginLeft: 15,
+    padding: 10,
+    alignItems: "center",
+    marginTop: 10,
   },
 });
 
