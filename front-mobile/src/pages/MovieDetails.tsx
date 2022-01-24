@@ -32,6 +32,26 @@ const movie: Movie = {
         roles: [{ id: 1, authority: "MEMBER" }],
       },
     },
+    {
+      id: 2,
+      text: "Gostei muito do filme. Foi muito bom mesmo. Pena que durou pouco.",
+      user: {
+        id: 1,
+        name: "Maria Silva",
+        email: "maria@gmail.com",
+        roles: [{ id: 1, authority: "MEMBER" }],
+      },
+    },
+    {
+      id: 3,
+      text: "Gostei muito do filme. Foi muito bom mesmo. Pena que durou pouco.",
+      user: {
+        id: 1,
+        name: "Maria Silva",
+        email: "maria@gmail.com",
+        roles: [{ id: 1, authority: "MEMBER" }],
+      },
+    },
   ],
 };
 

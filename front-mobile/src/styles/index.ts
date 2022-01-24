@@ -234,11 +234,13 @@ const theme = StyleSheet.create({
   detailsView: {
     backgroundColor: colors.backgroundColor,
     padding: 10,
+    paddingBottom: 30
   },
   reviewContainer: {
     flexDirection: "row",
     marginLeft: 40,
     alignItems: "center",
+    marginTop: 20
   },
   inputContainer: {
     backgroundColor: colors.white,
