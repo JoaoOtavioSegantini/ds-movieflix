@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.movieflix.dto.RoleDTO;
+import com.devsuperior.movieflix.dto.SocialDTO;
 import com.devsuperior.movieflix.dto.UserDTO;
 import com.devsuperior.movieflix.dto.UserInsertDTO;
 import com.devsuperior.movieflix.dto.UserUpdateDTO;
@@ -32,7 +33,7 @@ import com.devsuperior.movieflix.services.exceptions.UnauthorizedException;
 
 @Service
 public class UserService implements UserDetailsService {
-	
+
 	private static Logger logger = LoggerFactory.getLogger(UserService.class);
 
 	@Autowired
@@ -48,16 +49,16 @@ public class UserService implements UserDetailsService {
 	public Page<UserDTO> findAllPaged(PageRequest pageRequest) {
 		Page<User> list = repository.findAll(pageRequest);
 
-		return list.map(x -> new UserDTO(x));
+		return list.map(UserDTO::new);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public UserDTO findById(Long id) {
 		Optional<User> obj = repository.findById(id);
 		User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
 		return new UserDTO(entity);
 	}
-	
+
 	@Transactional
 	public UserDTO insert(UserInsertDTO dto) {
 		User entity = new User();
@@ -66,55 +67,82 @@ public class UserService implements UserDetailsService {
 		entity = repository.save(entity);
 		return new UserDTO(entity);
 	}
-	private void copyDtoToEntity(UserDTO dto, User entity) {
-		entity.setName(dto.getName());
-		entity.setEmail(dto.getEmail());
 
+	@Transactional
+	public UserDTO social(SocialDTO dto) {
+		User entity = new User();
+		User userExist = repository.findUserByProviderAndUid(dto.getProvider(), dto.getUid());
+
+		if (userExist != null) {
+			return new UserDTO(userExist);
+
+		}
+
+		entity.setEmail(dto.getInfo().getEmail());
+		entity.setName(dto.getInfo().getName());
+		entity.setImage(dto.getInfo().getImage());
+		entity.setProvider(dto.getProvider());
+		entity.setUid(dto.getUid());
 
 		entity.getRoles().clear();
 		for (RoleDTO roleDto : dto.getRoles()) {
-			if(roleDto.getId() != 1L) {
+			if (roleDto.getId() != 1L) {
 				throw new UnauthorizedException("Usuário sem permissão para este serviço");
 			}
 			Role role = roleRepository.getOne(roleDto.getId());
 			entity.getRoles().add(role);
 		}
-		
-	}
-	@Transactional
-	public UserDTO update(Long id, UserUpdateDTO dto) {
-	try {
-		User entity = repository.getOne(id);
-		copyDtoToEntity(dto, entity);
-
-		
 		entity = repository.save(entity);
 		return new UserDTO(entity);
 	}
-	catch (EntityNotFoundException e) {
-		throw new ResourceNotFoundException("Id not found " + id);
+
+	private void copyDtoToEntity(UserDTO dto, User entity) {
+		entity.setName(dto.getName());
+		entity.setEmail(dto.getEmail());
+
+		entity.getRoles().clear();
+		for (RoleDTO roleDto : dto.getRoles()) {
+			if (roleDto.getId() != 1L) {
+				throw new UnauthorizedException("Usuário sem permissão para este serviço");
+			}
+			Role role = roleRepository.getOne(roleDto.getId());
+			entity.getRoles().add(role);
+		}
+
+	}
+
+	@Transactional
+	public UserDTO update(Long id, UserUpdateDTO dto) {
+		try {
+			User entity = repository.getOne(id);
+			copyDtoToEntity(dto, entity);
+
+			entity = repository.save(entity);
+			return new UserDTO(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found " + id);
 
 		}
 
 	}
+
 	public void delete(Long id) {
 		try {
-		repository.deleteById(id);
+			repository.deleteById(id);
 
-	}
-		catch (EmptyResultDataAccessException e) {
+		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException("Id not found " + id);
-		}
-		catch (DataIntegrityViolationException e) {
+		} catch (DataIntegrityViolationException e) {
 
 			throw new DataBaseException("Integrity violation");
 		}
 	}
-	
+
 	@Transactional
 	public void updatePassword(String password, Long userId) {
-	        repository.updatePassword(password, userId);
-	    }
+		repository.updatePassword(password, userId);
+	}
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = repository.findByEmail(username);
