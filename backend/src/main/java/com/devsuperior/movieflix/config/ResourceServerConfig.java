@@ -22,19 +22,20 @@ import org.springframework.web.filter.CorsFilter;
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
-	
+
 	@Autowired
 	private Environment env;
 
 	@Autowired
 	private JwtTokenStore tokenStore;
 
-	private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**", "/emails", "/emails/reset" };
+	private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**", "/emails", "/emails/reset",
+			"/api/v1/social_auth/callback" };
 
 	private static final String[] VISITOR_OR_MEMBER = { "/movies/**", "/genres" };
 
 	private static final String[] MEMBER = { "/reviews/**", "/reviews" };
-	
+
 	private static final String[] SIGNUP = { "/users" };
 
 	@Override
@@ -44,24 +45,23 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		
-	//h2
-	if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
-					http.headers().frameOptions().disable();
-	}
-	
+
+		// h2
+		if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
+			http.headers().frameOptions().disable();
+		}
+
 		http.authorizeRequests()
-		.antMatchers(PUBLIC).permitAll()
-		.antMatchers(HttpMethod.POST, SIGNUP).permitAll()
-		.antMatchers(HttpMethod.GET,VISITOR_OR_MEMBER).hasAnyAuthority("VISITOR", "MEMBER")
-		.antMatchers(MEMBER).hasAuthority("MEMBER")
-		.anyRequest().authenticated();
-		
+				.antMatchers(PUBLIC).permitAll()
+				.antMatchers(HttpMethod.POST, SIGNUP).permitAll()
+				.antMatchers(HttpMethod.GET, VISITOR_OR_MEMBER).hasAnyAuthority("VISITOR", "MEMBER")
+				.antMatchers(MEMBER).hasAuthority("MEMBER")
+				.anyRequest().authenticated();
+
 		http.cors().configurationSource(corsConfigurationSource());
 
-
 	}
-	
+
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration corsConfig = new CorsConfiguration();
@@ -77,12 +77,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	@Bean
 	public FilterRegistrationBean<CorsFilter> corsFilter() {
-		FilterRegistrationBean<CorsFilter> bean 
-			= new FilterRegistrationBean<>(new CorsFilter(corsConfigurationSource()));
+		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(
+				new CorsFilter(corsConfigurationSource()));
 		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
 		return bean;
-	}	
-
-
+	}
 
 }
