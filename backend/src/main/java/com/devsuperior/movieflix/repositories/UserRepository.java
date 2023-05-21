@@ -10,11 +10,13 @@ import com.devsuperior.movieflix.entities.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-	
+
 	User findByEmail(String email);
-	
+
+	User findUserByProviderAndUid(String provider, String uid);
+
 	@Modifying
-    @Query("update User u set u.password = :password where u.id = :id")
+	@Query("update User u set u.password = :password where u.id = :id")
 	void updatePassword(@Param("password") String password, @Param("id") Long id);
 
 }
