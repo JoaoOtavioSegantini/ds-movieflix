@@ -1,13 +1,13 @@
 import * as userMock from '@utils/auth'
 
-interface methods {
+interface Methods {
   userValidMember: () => void
   userValidVisitor: () => void
   userAll: () => void
   userInvalid: () => void
 }
 
-export default class SessionMock implements methods {
+export default class SessionMock implements Methods {
   userValidMember() {
     const loginSessionData: userMock.LoginResponse = {
       access_token: 'x.y.zzz_user_mock_token',
