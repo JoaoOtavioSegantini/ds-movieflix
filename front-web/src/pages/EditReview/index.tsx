@@ -41,9 +41,15 @@ const EditReview = () => {
   const member = isAllowedByRole(['MEMBER'])
 
   const saveAvaliation = () => {
-    if (!member) return
+    if (!member) {
+      return
+    }
+
     const saveRev = document.querySelector('textarea')?.value
-    if (!saveRev?.match(/^(?!\s*$).+/)) return setError(true)
+
+    if (!saveRev?.match(/^(?!\s*$).+/)) {
+      return setError(true)
+    }
 
     makePrivateRequest({
       url: `reviews/${reviewId}`,

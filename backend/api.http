@@ -1,0 +1,188 @@
+ 
+@username = alex@gmail.com
+@password = 123456
+
+@host = http://localhost:8080
+
+@token = {{login.response.body.access_token}}
+@tokenSocial = {{loginSocial.response.body.access_token}}
+@refresh = {{login.response.body.refresh_token}}
+@refreshSocial = {{loginSocial.response.body.refresh_token}}
+@current_token = {{token}}
+@current_refresh_token = {{refresh}}
+
+# @name loginSocial
+POST {{host}}/api/v1/social_auth/callback
+Content-Type: application/json
+
+{
+  "provider": "google_oauth2",
+  "uid": "sdifiojdoijfodi",
+  "idToken": "aijfoifgeiieo993+65dfdf",
+  "info": {
+    "name": "um simples nome",
+    "image": "https://mundo-xxx.com.br",
+    "email": "joaossmp@gmail.com"
+  }
+}
+
+
+###
+# @name login
+POST {{host}}/oauth/token
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+Authorization: Basic dsdesafiobootcampdevsuperior:dsdesafiobootcampdevsuperior22072021
+
+grant_type=password
+&username={{username}}
+&password={{password}}
+
+
+###
+GET {{host}}/genres
+Content-Type: application/json
+Authorization: Bearer {{current_token}}
+
+###
+GET {{host}}/movies
+Content-Type: application/json
+Authorization: Bearer {{current_token}}
+
+###
+POST {{host}}/movies
+Content-Type: application/json
+Authorization: Bearer {{current_token}}
+
+{
+  "img_url": "a simple url", 
+  "sub_title": "a simple sub title",
+   "synopsis": "a simple synopsis", 
+   "title": "simple title", 
+   "year": 2023, 
+   "genre_id": 1
+}
+
+###
+GET {{host}}/movies/1
+Content-Type: application/javascript
+Authorization: Bearer {{current_token}}
+
+###
+PUT {{host}}/movies/1
+Content-Type: application/javascript
+Authorization: Bearer {{current_token}}
+
+{
+  "img_url": "a simple url", 
+  "sub_title": "a simple sub title",
+   "synopsis": "a simple synopsis", 
+   "title": "simple title", 
+   "year": 2023, 
+   "genre_id": 1
+}
+
+###
+DELETE {{host}}/movies/1
+Content-Type: application/javascript
+Authorization: Bearer {{current_token}}
+
+
+###
+POST {{host}}/emails
+Content-Type: application/json
+Authorization: Bearer {{current_token}}
+
+{
+  "to": "alex@gmail.com"
+}
+
+###
+POST {{host}}/emails/reset
+Content-Type: application/json
+Authorization: Bearer {{current_token}}
+
+{
+  "password": "123456",
+  "token": "a faker token"
+}
+
+###
+GET {{host}}/reviews
+Content-Type: application/json
+Authorization: Bearer {{current_token}}
+
+{
+  "password": "123456",
+  "token": "a faker token"
+}
+
+###
+POST {{host}}/reviews
+Content-Type: application/json
+Authorization: Bearer {{current_token}}
+
+{
+  "movieId": 1, 
+  "text": "simplesmente adorei!"
+}
+
+###
+PUT {{host}}/reviews/1
+Content-Type: application/json
+Authorization: Bearer {{current_token}}
+
+{
+  "text": "um filme simplesmente ok..."
+}
+
+###
+DELETE {{host}}/reviews/1
+Content-Type: application/json
+Authorization: Bearer {{current_token}}
+
+###
+GET {{host}}/reviews/myReviews
+Content-Type: application/json
+Authorization: Bearer {{current_token}}
+
+###
+GET {{host}}/users
+Content-Type: application/json
+Authorization: Bearer {{current_token}}
+
+###
+POST {{host}}/users
+Content-Type: application/json
+Authorization: Bearer {{current_token}}
+
+{
+  "name": "a simple name",
+  "email": "johndoe@gmail.com",
+  "password": "123456"
+}
+
+###
+GET {{host}}/users/1
+Content-Type: application/json
+Authorization: Bearer {{current_token}}
+
+###
+PUT {{host}}/users/1
+Content-Type: application/json
+Authorization: Bearer {{current_token}}
+
+{
+  "name": "a simple name",
+  "email": "johndoe@gmail.com"
+}
+
+###
+DELETE {{host}}/users/1
+Content-Type: application/json
+Authorization: Bearer {{current_token}}
+
+###
+GET {{host}}/users/me
+Content-Type: application/json
+Authorization: Bearer {{current_token}}
