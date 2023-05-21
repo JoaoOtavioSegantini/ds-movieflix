@@ -26,43 +26,41 @@ import com.devsuperior.movieflix.services.ReviewService;
 @RestController
 @RequestMapping(value = "/reviews")
 public class ReviewResource {
-	
+
 	@Autowired
 	private ReviewService service;
-	
+
 	@Autowired
 	private AuthService authService;
 
-	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<ReviewDTO> findById(@PathVariable Long id) {
 		ReviewDTO dto = service.findById(id);
 		return ResponseEntity.ok().body(dto);
 	}
-	
+
 	@GetMapping(value = "/myReviews")
 	public ResponseEntity<List<ResponseMyReviewsDTO>> find() {
 		List<ResponseMyReviewsDTO> dto = service.find();
 		return ResponseEntity.ok().body(dto);
 	}
-	
+
 	@PostMapping
 	public ResponseEntity<ReviewDTO> insert(@Valid @RequestBody ReviewDTO dto) {
-		Long id = authService.authenticated().getId();
-		authService.validateMemberOrAdmin(id);
+		authService.validateMemberOrAdmin();
 		ReviewDTO newDto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newDto.getId()).toUri();
 		return ResponseEntity.created(uri).body(newDto);
 	}
-	
+
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<ReviewDTO> update(@PathVariable Long id,@Valid @RequestBody ReviewDTO dto) {
+	public ResponseEntity<ReviewDTO> update(@PathVariable Long id, @Valid @RequestBody ReviewDTO dto) {
 		Long userId = authService.authenticated().getId();
 		authService.validateSelfOrAdmin(userId);
 		dto = service.update(id, dto);
 		return ResponseEntity.ok().body(dto);
 	}
-	
+
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<UserDTO> delete(@PathVariable Long id) {
 		Long userId = authService.authenticated().getId();
@@ -72,4 +70,3 @@ public class ReviewResource {
 	}
 
 }
-

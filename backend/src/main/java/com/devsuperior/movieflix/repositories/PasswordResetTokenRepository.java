@@ -6,7 +6,7 @@ import com.devsuperior.movieflix.entities.PasswordResetToken;
 
 @Repository
 public interface PasswordResetTokenRepository extends JpaRepository<PasswordResetToken, Long> {
-	
+
     PasswordResetToken findByToken(String token);
 
 }

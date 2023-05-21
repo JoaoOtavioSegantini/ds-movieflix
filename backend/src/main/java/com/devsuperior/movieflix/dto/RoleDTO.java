@@ -6,7 +6,6 @@ import com.devsuperior.movieflix.entities.Role;
 
 public class RoleDTO implements Serializable {
 
-
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
@@ -15,7 +14,6 @@ public class RoleDTO implements Serializable {
 	public RoleDTO() {
 
 	}
-
 
 	public RoleDTO(Long id, String authority) {
 		super();
@@ -28,7 +26,6 @@ public class RoleDTO implements Serializable {
 		id = role.getId();
 		authority = role.getAuthority();
 	}
-
 
 	public Long getId() {
 		return id;
@@ -45,6 +42,5 @@ public class RoleDTO implements Serializable {
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
-
 
 }

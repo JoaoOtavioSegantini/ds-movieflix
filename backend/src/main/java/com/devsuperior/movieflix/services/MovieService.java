@@ -23,28 +23,29 @@ import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class MovieService {
-	
+
 	@Autowired
 	private MovieRepository repository;
-	
+
 	@Autowired
 	private GenreRepository genreRepository;
-	
+
 	@Transactional(readOnly = true)
 	public Page<MoviesDTO> findAllPaged(Long genreId, PageRequest pageRequest) {
-		Genre genre = (genreId == 0) ? null : genreRepository.getOne(genreId);		
+		Genre genre = (genreId == 0) ? null : genreRepository.getOne(genreId);
 		Page<Movie> page = repository.find(genre, pageRequest);
 		repository.find(page.toList());
-		return page.map(x -> new MoviesDTO(x));
-
+		return page.map(MoviesDTO::new);
 
 	}
+
 	@Transactional(readOnly = true)
 	public MovieDTO findById(Long id) {
 		Optional<Movie> obj = repository.findById(id);
 		Movie entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
 		return new MovieDTO(entity);
 	}
+
 	@Transactional
 	public MovieDTO insert(MovieDTO dto) {
 		Movie entity = new Movie();
@@ -52,7 +53,7 @@ public class MovieService {
 		entity = repository.save(entity);
 		return new MovieDTO(entity);
 	}
-	
+
 	private void copyDtoToEntity(MovieDTO dto, Movie entity) {
 		entity.setTitle(dto.getTitle());
 		entity.setSubTitle(dto.getSubTitle());
@@ -63,30 +64,28 @@ public class MovieService {
 		entity.setGenre(genre);
 
 	}
-	
+
 	@Transactional
 	public MovieDTO update(Long id, MovieDTO dto) {
-	try {
-		Movie entity = repository.getOne(id);
-		copyDtoToEntity(dto, entity);
-		entity = repository.save(entity);
-		return new MovieDTO(entity);
-	}
-	catch (EntityNotFoundException e) {
-		throw new ResourceNotFoundException("Id not found " + id);
+		try {
+			Movie entity = repository.getOne(id);
+			copyDtoToEntity(dto, entity);
+			entity = repository.save(entity);
+			return new MovieDTO(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found " + id);
 
 		}
 
 	}
+
 	public void delete(Long id) {
 		try {
-		repository.deleteById(id);
+			repository.deleteById(id);
 
-	}
-		catch (EmptyResultDataAccessException e) {
+		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException("Id not found " + id);
-		}
-		catch (DataIntegrityViolationException e) {
+		} catch (DataIntegrityViolationException e) {
 
 			throw new DataBaseException("Integrity violation");
 		}

@@ -14,10 +14,10 @@ import com.devsuperior.movieflix.services.GenreService;
 @RestController
 @RequestMapping(value = "/genres")
 public class GenreResources {
-	
+
 	@Autowired
 	private GenreService service;
-	
+
 	@GetMapping
 	public ResponseEntity<List<GenreDTO>> findAll() {
 		List<GenreDTO> list = service.findAll();

@@ -16,21 +16,21 @@ import javax.persistence.Table;
 @Table(name = "tb_genre")
 public class Genre implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	
+
 	@OneToMany(mappedBy = "genre", fetch = FetchType.LAZY)
 	private List<Movie> movies = new ArrayList<>();
-	
-	public Genre () {
-		
+
+	public Genre() {
+
 	}
 
 	public Genre(Long id, String name) {
-		
+
 		this.id = id;
 		this.name = name;
 	}
@@ -50,7 +50,7 @@ public class Genre implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public List<Movie> getMovies() {
 		return movies;
 	}
@@ -79,8 +79,5 @@ public class Genre implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
 
 }

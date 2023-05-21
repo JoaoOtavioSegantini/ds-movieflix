@@ -7,19 +7,20 @@ import javax.validation.constraints.NotBlank;
 import com.devsuperior.movieflix.entities.Review;
 
 public class ReviewDTO implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long id;
-	
+
 	@NotBlank(message = "Não é permitido inserir texto vazio na avaliação")
 	private String text;
-		
+
 	private Long movieId;
-	
+
 	private UserDTO user;
-	
+
 	public ReviewDTO() {
-		
+
 	}
 
 	public ReviewDTO(Long id, String text, Long movieId, UserDTO user) {
@@ -29,7 +30,7 @@ public class ReviewDTO implements Serializable {
 		this.movieId = movieId;
 		this.user = user;
 	}
-	
+
 	public ReviewDTO(Review entity) {
 
 		this.id = entity.getId();
@@ -54,7 +55,6 @@ public class ReviewDTO implements Serializable {
 		this.text = text;
 	}
 
-
 	public Long getMovieId() {
 		return movieId;
 	}
@@ -63,7 +63,6 @@ public class ReviewDTO implements Serializable {
 		this.movieId = movieId;
 	}
 
-
 	public UserDTO getUser() {
 		return user;
 	}
@@ -71,6 +70,5 @@ public class ReviewDTO implements Serializable {
 	public void setUser(UserDTO user) {
 		this.user = user;
 	}
-	
 
 }

@@ -57,8 +57,7 @@ public class MovieResource {
 
 	@PostMapping
 	public ResponseEntity<MovieDTO> insert(@Valid @RequestBody MovieDTO dto) {
-		Long id = authService.authenticated().getId();
-		authService.validateAdmin(id);
+		authService.validateAdmin();
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(dto);
@@ -66,8 +65,7 @@ public class MovieResource {
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<MovieDTO> update(@PathVariable Long id, @Valid @RequestBody MovieDTO dto) {
-		Long userid = authService.authenticated().getId();
-		authService.validateAdmin(userid);
+		authService.validateAdmin();
 		dto = service.update(id, dto);
 
 		return ResponseEntity.ok().body(dto);
@@ -75,8 +73,7 @@ public class MovieResource {
 
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<MovieDTO> delete(@PathVariable Long id) {
-		Long userid = authService.authenticated().getId();
-		authService.validateAdmin(userid);
+		authService.validateAdmin();
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}

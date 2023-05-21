@@ -11,21 +11,18 @@ import com.devsuperior.movieflix.entities.User;
 
 public class UserDTO implements Serializable {
 
-
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	
+
 	@NotBlank(message = "Campo obrigatório!")
 	@Email(message = "Email inválido")
 	private String email;
-	
+
 	@NotBlank(message = "Campo obrigatório!")
 	private String name;
 
-
-	Set<RoleDTO> roles = new HashSet<>();
-	
+	private Set<RoleDTO> roles = new HashSet<>();
 
 	public UserDTO() {
 
@@ -35,7 +32,7 @@ public class UserDTO implements Serializable {
 		this.id = id;
 		this.email = email;
 		this.name = name;
-		
+
 	}
 
 	public UserDTO(User entity) {
@@ -45,7 +42,6 @@ public class UserDTO implements Serializable {
 		entity.getRoles().forEach(role -> this.roles.add(new RoleDTO(role)));
 
 	}
-	
 
 	public Long getId() {
 		return id;
@@ -63,7 +59,6 @@ public class UserDTO implements Serializable {
 		this.email = email;
 	}
 
-
 	public String getName() {
 		return name;
 	}
@@ -75,10 +70,5 @@ public class UserDTO implements Serializable {
 	public Set<RoleDTO> getRoles() {
 		return roles;
 	}
-	
-	//public List<ReviewDTO> getReviews() {
-	//	return reviews;
-	//}
-
 
 }

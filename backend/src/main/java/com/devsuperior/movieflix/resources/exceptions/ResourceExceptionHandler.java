@@ -18,7 +18,7 @@ import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
-	
+
 	@ExceptionHandler(ResourceNotFoundException.class)
 	public ResponseEntity<StandardError> entityNotFound(ResourceNotFoundException e, HttpServletRequest request) {
 		StandardError err = new StandardError();
@@ -29,6 +29,7 @@ public class ResourceExceptionHandler {
 		err.setPath(request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
 	}
+
 	@ExceptionHandler(DataBaseException.class)
 	public ResponseEntity<StandardError> database(DataBaseException e, HttpServletRequest request) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
@@ -50,15 +51,14 @@ public class ResourceExceptionHandler {
 		err.setError("Validation exception");
 		err.setMessage(e.getMessage());
 		err.setPath(request.getRequestURI());
-		for (FieldError f :e.getBindingResult().getFieldErrors()) {
-		     err.addError(f.getField(), f.getDefaultMessage());
+		for (FieldError f : e.getBindingResult().getFieldErrors()) {
+			err.addError(f.getField(), f.getDefaultMessage());
 
 		}
 
-
 		return ResponseEntity.status(status).body(err);
 	}
-	
+
 	@ExceptionHandler(EmailException.class)
 	public ResponseEntity<StandardError> email(EmailException e, HttpServletRequest request) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;

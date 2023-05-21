@@ -15,10 +15,10 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class PasswordResetToken implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
 
-	@Id
+    private static final long serialVersionUID = 1L;
+
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -64,7 +64,7 @@ public class PasswordResetToken implements Serializable {
         this.expiryDate = expiryDate;
     }
 
-    public void setExpiryDate(int minutes){
+    public void setExpiryDate(int minutes) {
         Calendar now = Calendar.getInstance();
         now.add(Calendar.MINUTE, minutes);
         this.expiryDate = now.getTime();

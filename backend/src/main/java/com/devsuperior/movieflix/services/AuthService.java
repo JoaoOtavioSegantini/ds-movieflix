@@ -3,7 +3,6 @@ package com.devsuperior.movieflix.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.movieflix.entities.User;
 import com.devsuperior.movieflix.repositories.UserRepository;
@@ -16,7 +15,9 @@ public class AuthService {
 	@Autowired
 	private UserRepository userRepository;
 
-	@Transactional(readOnly = true)
+	private static final String ROLE_ADMIN = "ROLE_ADMIN";
+	private static final String MSG = "Access denied";
+
 	public User authenticated() {
 		try {
 			String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -28,22 +29,22 @@ public class AuthService {
 
 	public void validateSelfOrAdmin(Long userId) {
 		User user = authenticated();
-		if (!user.getId().equals(userId) && !user.hasHole("ROLE_ADMIN")) {
-			throw new ForbiddenException("Access denied");
+		if (!user.getId().equals(userId) && !user.hasHole(ROLE_ADMIN)) {
+			throw new ForbiddenException(MSG);
 		}
 	}
 
-	public void validateMemberOrAdmin(Long userId) {
+	public void validateMemberOrAdmin() {
 		User user = authenticated();
-		if (!user.hasHole("MEMBER") && !user.hasHole("ROLE_ADMIN")) {
-			throw new ForbiddenException("Access denied");
+		if (!user.hasHole("MEMBER") && !user.hasHole(ROLE_ADMIN)) {
+			throw new ForbiddenException(MSG);
 		}
 	}
-	
-	public void validateAdmin(Long userId) {
+
+	public void validateAdmin() {
 		User user = authenticated();
-		if (!user.hasHole("ROLE_ADMIN")) {
-			throw new ForbiddenException("Access denied");
+		if (!user.hasHole(ROLE_ADMIN)) {
+			throw new ForbiddenException(MSG);
 		}
 	}
 

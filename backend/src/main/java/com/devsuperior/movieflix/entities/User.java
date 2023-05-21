@@ -1,6 +1,5 @@
 package com.devsuperior.movieflix.entities;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,38 +22,41 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "tb_user")
-public class User implements UserDetails, Serializable {
-	
+public class User implements UserDetails {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(unique = true)
 	private String email;
-	
+
 	private String password;
 	private String name;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(
-			name = "tb_user_role",
-			joinColumns = @JoinColumn(name = "user_id"),
-			inverseJoinColumns = @JoinColumn(name = "role_id"))
+	@JoinTable(name = "tb_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
-	
-	public User () {
 
-		
+	private String uid;
+	private String provider;
+	private String image;
+
+	public User() {
+
 	}
-	
-	public User(Long id, String email, String password, String name) {
+
+	public User(Long id, String email, String password, String name, String provider, String image, String uid) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.password = password;
 		this.name = name;
+		this.provider = provider;
+		this.uid = uid;
+		this.image = image;
 	}
 
 	public Long getId() {
@@ -88,11 +90,35 @@ public class User implements UserDetails, Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public Set<Role> getRoles() {
 		return roles;
 	}
-	
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getProvider() {
+		return provider;
+	}
+
+	public void setProvider(String provider) {
+		this.provider = provider;
+	}
+
+	public String getUid() {
+		return uid;
+	}
+
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -117,7 +143,7 @@ public class User implements UserDetails, Serializable {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
@@ -153,7 +179,7 @@ public class User implements UserDetails, Serializable {
 		// TODO Auto-generated method stub
 		return true;
 	}
-	
+
 	public boolean hasHole(String roleName) {
 		for (Role role : roles) {
 			if (role.getAuthority().equals(roleName)) {
@@ -162,6 +188,5 @@ public class User implements UserDetails, Serializable {
 		}
 		return false;
 	}
-	
 
 }

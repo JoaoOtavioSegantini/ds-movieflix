@@ -45,8 +45,7 @@ public class UserResource {
 			@RequestParam(value = "orderBy", defaultValue = "name") String orderBy) {
 
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		Long id = authService.authenticated().getId();
-		authService.validateAdmin(id);
+		authService.validateAdmin();
 		Page<UserDTO> list = service.findAllPaged(pageRequest);
 
 		return ResponseEntity.ok().body(list);
@@ -59,7 +58,7 @@ public class UserResource {
 		UserDTO dto = service.findById(id);
 		return ResponseEntity.ok().body(dto);
 	}
-	
+
 	@GetMapping(value = "/me")
 	public ResponseEntity<UserDTO> findMe() {
 		Long userId = authService.authenticated().getId();
@@ -67,7 +66,6 @@ public class UserResource {
 		UserDTO dto = service.findById(userId);
 		return ResponseEntity.ok().body(dto);
 	}
-
 
 	@PostMapping
 	public ResponseEntity<UserDTO> insert(@Valid @RequestBody UserInsertDTO dto) {

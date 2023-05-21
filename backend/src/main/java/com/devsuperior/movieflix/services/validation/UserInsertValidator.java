@@ -20,7 +20,8 @@ public class UserInsertValidator implements ConstraintValidator<UserInsertValid,
 
 	@Override
 	public void initialize(UserInsertValid ann) {
-	}
+   // TODO document why this method is empty
+ }
 
 	@Override
 	public boolean isValid(UserInsertDTO dto, ConstraintValidatorContext context) {
@@ -31,7 +32,8 @@ public class UserInsertValidator implements ConstraintValidator<UserInsertValid,
 		if (user != null) {
 			list.add(new FieldMessage("email", "Email já existe"));
 		}
-		// Coloque aqui seus testes de validação, acrescentando objetos FieldMessage à lista
+		// Coloque aqui seus testes de validação, acrescentando objetos FieldMessage à
+		// lista
 
 		for (FieldMessage e : list) {
 			context.disableDefaultConstraintViolation();
@@ -40,4 +42,4 @@ public class UserInsertValidator implements ConstraintValidator<UserInsertValid,
 		}
 		return list.isEmpty();
 	}
-} 
+}

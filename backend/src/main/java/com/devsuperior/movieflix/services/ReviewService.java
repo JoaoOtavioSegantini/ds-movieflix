@@ -42,7 +42,7 @@ public class ReviewService {
 	public List<ReviewDTO> findAll() {
 		List<Review> list = repository.findAll();
 
-		return list.stream().map(x -> new ReviewDTO(x)).collect(Collectors.toList());
+		return list.stream().map(ReviewDTO::new).collect(Collectors.toList());
 	}
 
 	@Transactional(readOnly = true)
@@ -68,33 +68,30 @@ public class ReviewService {
 	public List<ResponseMyReviewsDTO> find() {
 		Long id = authService.authenticated().getId();
 		List<Review> list = repository.findMyReviews(id);
-		return list.stream().map(x -> new ResponseMyReviewsDTO(x)).collect(Collectors.toList());
+		return list.stream().map(ResponseMyReviewsDTO::new).collect(Collectors.toList());
 	}
-	
+
 	@Transactional
 	public ReviewDTO update(Long id, ReviewDTO dto) {
-	try {
-		Review entity = repository.getOne(id);
-		entity.setText(dto.getText());
-		entity = repository.save(entity);
-		return new ReviewDTO(entity);
-	}
-	catch (EntityNotFoundException e) {
-		throw new ResourceNotFoundException("Id not found " + id);
+		try {
+			Review entity = repository.getOne(id);
+			entity.setText(dto.getText());
+			entity = repository.save(entity);
+			return new ReviewDTO(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found " + id);
 
 		}
 
 	}
-	
+
 	public void delete(Long id) {
 		try {
-		repository.deleteById(id);
+			repository.deleteById(id);
 
-	}
-		catch (EmptyResultDataAccessException e) {
+		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException("Id not found " + id);
-		}
-		catch (DataIntegrityViolationException e) {
+		} catch (DataIntegrityViolationException e) {
 
 			throw new DataBaseException("Integrity violation");
 		}

@@ -22,8 +22,7 @@ import com.devsuperior.movieflix.components.JwtTokenEnhancer;
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
-	
-	
+
 	@Value("${security.oauth2.client.client-id}")
 	private String clientId;
 
@@ -33,7 +32,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Value("${jwt.duration}")
 	private Integer jwtDuration;
 
-
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
@@ -42,13 +40,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 	@Autowired
 	private JwtTokenStore tokenStore;
-	
+
 	@Autowired
 	private JwtTokenEnhancer tokenEnhancer;
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
-	
+
 	@Autowired
 	private UserDetailsService userDetailsService;
 
@@ -61,12 +59,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory()
-		.withClient(clientId)
-		.secret(passwordEncoder.encode(clientSecret))
-		.scopes("read", "write")
-		.authorizedGrantTypes("password", "refresh_token")
-		.accessTokenValiditySeconds(jwtDuration)
-		.refreshTokenValiditySeconds(jwtDuration);
+				.withClient(clientId)
+				.secret(passwordEncoder.encode(clientSecret))
+				.scopes("read", "write")
+				.authorizedGrantTypes("password", "refresh_token")
+				.accessTokenValiditySeconds(jwtDuration)
+				.refreshTokenValiditySeconds(jwtDuration);
 	}
 
 	@Override
@@ -75,10 +73,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		chain.setTokenEnhancers(Arrays.asList(accessTokenConverter, tokenEnhancer));
 
 		endpoints.authenticationManager(authenticationManager)
-		.tokenStore(tokenStore)
-		.accessTokenConverter(accessTokenConverter)
-		.tokenEnhancer(chain)
-		.userDetailsService(userDetailsService);
+				.tokenStore(tokenStore)
+				.accessTokenConverter(accessTokenConverter)
+				.tokenEnhancer(chain)
+				.userDetailsService(userDetailsService);
 	}
 
 }

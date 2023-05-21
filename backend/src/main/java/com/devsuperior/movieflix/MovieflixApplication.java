@@ -12,11 +12,11 @@ public class MovieflixApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MovieflixApplication.class, args);
 	}
-	
-	@Bean
-    public SessionRegistry sessionRegistry() {
-        return new SessionRegistryImpl();
 
-    }
+	@Bean
+	public SessionRegistry sessionRegistry() {
+		return new SessionRegistryImpl();
+
+	}
 
 }

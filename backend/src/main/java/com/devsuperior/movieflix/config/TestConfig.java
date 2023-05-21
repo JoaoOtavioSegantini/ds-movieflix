@@ -10,7 +10,7 @@ import com.devsuperior.movieflix.services.MockEmailService;
 @Configuration
 @Profile("test")
 public class TestConfig {
-	
+
 	@Bean
 	public EmailService emailService() {
 		return new MockEmailService();

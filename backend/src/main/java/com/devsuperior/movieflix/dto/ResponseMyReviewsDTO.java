@@ -5,27 +5,25 @@ import java.io.Serializable;
 import com.devsuperior.movieflix.entities.Review;
 
 public class ResponseMyReviewsDTO implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
 
 	private Long id;
 
 	private String text;
-	
+
 	private String imgUrl;
-	
+
 	private String subTitle;
-	
+
 	private String title;
-	
+
 	private Long movieId;
 
-	
-    public ResponseMyReviewsDTO() {
-    	
-    }
-    
+	public ResponseMyReviewsDTO() {
+
+	}
+
 	public ResponseMyReviewsDTO(Long id, String text, String imgUrl, String subTitle, String title, Long movieId) {
 		super();
 		this.id = id;
@@ -35,18 +33,14 @@ public class ResponseMyReviewsDTO implements Serializable {
 		this.title = title;
 		this.movieId = movieId;
 	}
-	
+
 	public ResponseMyReviewsDTO(Review entity) {
-        this.id = entity.getId();
+		this.id = entity.getId();
 		this.text = entity.getText();
 		this.imgUrl = entity.getMovie().getImgUrl();
 		this.subTitle = entity.getMovie().getSubTitle();
 		this.title = entity.getMovie().getTitle();
 		this.movieId = entity.getMovie().getId();
-	}
-	
-	public ResponseMyReviewsDTO(Review entity, MovieDTO dto) {
-		
 	}
 
 	public Long getId() {
@@ -96,6 +90,5 @@ public class ResponseMyReviewsDTO implements Serializable {
 	public void setMovieId(Long movieId) {
 		this.movieId = movieId;
 	}
-	
 
 }
