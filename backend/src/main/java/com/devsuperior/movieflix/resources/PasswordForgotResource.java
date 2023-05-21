@@ -1,10 +1,5 @@
 package com.devsuperior.movieflix.resources;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.validation.Valid;
@@ -25,6 +20,7 @@ import com.devsuperior.movieflix.entities.User;
 import com.devsuperior.movieflix.repositories.PasswordResetTokenRepository;
 import com.devsuperior.movieflix.repositories.UserRepository;
 import com.devsuperior.movieflix.services.EmailService;
+import com.devsuperior.movieflix.services.MailContentBuilder;
 import com.devsuperior.movieflix.services.UserService;
 import com.devsuperior.movieflix.services.exceptions.EmailException;
 
@@ -34,6 +30,7 @@ public class PasswordForgotResource {
 
 	@Autowired
 	private PasswordResetTokenRepository tokenRepository;
+
 	@Autowired
 	private EmailService emailService;
 
@@ -45,9 +42,12 @@ public class PasswordForgotResource {
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-	
+
 	@Value(value = "${frontend.server.name}")
 	private String url;
+
+	@Autowired
+	MailContentBuilder mailContentBuilder;
 
 	@PostMapping
 	public ResponseEntity<Void> send(@RequestBody @Valid EmailDTO dto) {
@@ -56,7 +56,6 @@ public class PasswordForgotResource {
 		if (user == null) {
 			throw new EmailException("O usuário " + dto.getTo() + " não foi encontrado.");
 		}
-		;
 
 		PasswordResetToken token = new PasswordResetToken();
 		token.setToken(UUID.randomUUID().toString());
@@ -64,17 +63,10 @@ public class PasswordForgotResource {
 		token.setExpiryDate(30);
 		tokenRepository.save(token);
 
-		Locale local = new Locale("pt", "BR");
-		DateFormat formatDate = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss", local);
-		String expiryDate = formatDate.format(token.getExpiryDate());
+		String html = mailContentBuilder.generateForgotPasswordMailContent(token, dto, user);
 
-		Map<String, Object> model = new HashMap<>();
-		model.put("expiryDate", expiryDate);
-		model.put("user", user);
-		model.put("url", url);
-		model.put("resetUrl", url + "/reset-password?token=" + token.getToken());
-		dto.setModel(model);
-		emailService.sendEmail(dto);
+		emailService.sendEmail(dto, html);
+
 		return ResponseEntity.ok().build();
 
 	}
@@ -83,9 +75,9 @@ public class PasswordForgotResource {
 	public ResponseEntity<Void> reset(@RequestBody PasswordForgotDto dto) {
 		PasswordResetToken resetToken = tokenRepository.findByToken(dto.getToken());
 		if (resetToken == null) {
-			throw new EmailException("Token não encontrado: " + dto.getToken()); 
+			throw new EmailException("Token não encontrado: " + dto.getToken());
 		}
-		
+
 		if (dto.getPassword() == null) {
 			throw new EmailException("O password é obrigatório!");
 		}
