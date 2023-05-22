@@ -84,6 +84,10 @@ public class UserService implements UserDetailsService {
 		entity.setProvider(dto.getProvider());
 		entity.setUid(dto.getUid());
 
+		if (dto.getRoles().isEmpty() || dto.getRoles() == null) {
+			throw new DataBaseException("role is empty");
+		}
+
 		entity.getRoles().clear();
 		for (RoleDTO roleDto : dto.getRoles()) {
 			if (roleDto.getId() != 1L) {
@@ -97,6 +101,11 @@ public class UserService implements UserDetailsService {
 	}
 
 	private void copyDtoToEntity(UserDTO dto, User entity) {
+
+		if (dto.getRoles().isEmpty() || dto.getRoles() == null) {
+			throw new DataBaseException("role is empty");
+		}
+		
 		entity.setName(dto.getName());
 		entity.setEmail(dto.getEmail());
 

@@ -19,10 +19,11 @@ Content-Type: application/json
   "provider": "google_oauth2",
   "uid": "sdifiojdoijfodi",
   "idToken": "aijfoifgeiieo993+65dfdf",
+  "roles": [{ "id": 1 }],
   "info": {
     "name": "um simples nome",
     "image": "https://mundo-xxx.com.br",
-    "email": "joaossmp@gmail.com"
+    "email": "joao2@gmail.com"
   }
 }
 
@@ -55,36 +56,36 @@ Content-Type: application/json
 Authorization: Bearer {{current_token}}
 
 {
-  "img_url": "a simple url", 
-  "sub_title": "a simple sub title",
-   "synopsis": "a simple synopsis", 
+  "imgUrl": "a simple url", 
+  "subTitle": "a simple sub title",
+   "synopsis": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", 
    "title": "simple title", 
    "year": 2023, 
-   "genre_id": 1
+   "genreId": 1
 }
 
 ###
 GET {{host}}/movies/1
-Content-Type: application/javascript
+Content-Type: application/json
 Authorization: Bearer {{current_token}}
 
 ###
 PUT {{host}}/movies/1
-Content-Type: application/javascript
+Content-Type: application/json
 Authorization: Bearer {{current_token}}
 
 {
-  "img_url": "a simple url", 
-  "sub_title": "a simple sub title",
-   "synopsis": "a simple synopsis", 
+  "imgUrl": "a simple url", 
+  "subTitle": "a simple sub title",
+   "synopsis": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", 
    "title": "simple title", 
    "year": 2023, 
-   "genre_id": 1
+   "genreId": 1
 }
 
 ###
 DELETE {{host}}/movies/1
-Content-Type: application/javascript
+Content-Type: application/json
 Authorization: Bearer {{current_token}}
 
 
@@ -159,7 +160,8 @@ Authorization: Bearer {{current_token}}
 {
   "name": "a simple name",
   "email": "johndoe@gmail.com",
-  "password": "123456"
+  "password": "123456",
+  "roles": [{ "id": 1 }]
 }
 
 ###
@@ -174,7 +176,9 @@ Authorization: Bearer {{current_token}}
 
 {
   "name": "a simple name",
-  "email": "johndoe@gmail.com"
+  "email": "johndoe@gmail.com",
+    "roles": [{ "id": 2 }]
+
 }
 
 ###
