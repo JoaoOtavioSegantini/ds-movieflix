@@ -66,8 +66,9 @@ public class ReviewService {
 
 	@Transactional(readOnly = true)
 	public List<ResponseMyReviewsDTO> find() {
-		Long id = authService.authenticated().getId();
-		List<Review> list = repository.findMyReviews(id);
+		User user = authService.authenticated();
+		List<Review> list = repository.findMyReviews(user);
+		repository.findMyReviews(list);
 		return list.stream().map(ResponseMyReviewsDTO::new).collect(Collectors.toList());
 	}
 
