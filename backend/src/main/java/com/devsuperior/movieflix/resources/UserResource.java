@@ -53,8 +53,7 @@ public class UserResource {
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
-		Long userId = authService.authenticated().getId();
-		authService.validateSelfOrAdmin(userId);
+		authService.validateSelfOrAdmin(id);
 		UserDTO dto = service.findById(id);
 		return ResponseEntity.ok().body(dto);
 	}
@@ -62,7 +61,6 @@ public class UserResource {
 	@GetMapping(value = "/me")
 	public ResponseEntity<UserDTO> findMe() {
 		Long userId = authService.authenticated().getId();
-		authService.validateSelfOrAdmin(userId);
 		UserDTO dto = service.findById(userId);
 		return ResponseEntity.ok().body(dto);
 	}
@@ -76,17 +74,15 @@ public class UserResource {
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<UserDTO> update(@PathVariable Long id, @Valid @RequestBody UserUpdateDTO dto) {
-		Long userid = authService.authenticated().getId();
-		authService.validateSelfOrAdmin(userid);
-		UserDTO newDto = service.update(id, dto);
 
+		authService.validateSelfOrAdmin(id);
+		UserDTO newDto = service.update(id, dto);
 		return ResponseEntity.ok().body(newDto);
 	}
 
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<UserDTO> delete(@PathVariable Long id) {
-		Long userId = authService.authenticated().getId();
-		authService.validateSelfOrAdmin(userId);
+		authService.validateSelfOrAdmin(id);
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
