@@ -3,6 +3,7 @@ package com.devsuperior.movieflix.dto;
 import java.io.Serializable;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.devsuperior.movieflix.entities.Genre;
 
@@ -12,7 +13,8 @@ public class GenreDTO implements Serializable {
 
 	private Long id;
 
-	@NotBlank(message = "Campo obrigatório")
+	@NotBlank(message = "Campo não pode estar em branco")
+	@NotNull(message = "Campo não pode ser nulo")
 	private String name;
 
 	public GenreDTO() {

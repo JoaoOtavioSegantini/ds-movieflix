@@ -16,23 +16,24 @@ public class MovieDTO implements Serializable {
 	private Long id;
 
 	@Size(max = 60, message = "O campo título deve ter no máximo 60")
-	@NotBlank(message = "Campo obrigatório")
+	@NotBlank(message = "Campo não pode estar em branco")
+	@NotNull(message = "Campo não pode ser nulo")
 	private String title;
 
-	@NotBlank(message = "Campo obrigatório")
 	@Size(min = 5, max = 100, message = "O campo subtítulo deve ter no mínimo 5 letras e no máximo 100")
 	private String subTitle;
 
-	@NotNull(message = "Campo obrigatório")
+	@NotNull(message = "Campo não pode ser nulo")
 	private Integer year;
 
-	@NotBlank(message = "Campo obrigatório")
+	@NotNull(message = "Campo não pode ser nulo")
+	@NotBlank(message = "Campo não pode estar em branco")
 	private String imgUrl;
 
-	@NotBlank(message = "Campo obrigatório")
 	@Size(min = 20, message = "O campo da descrição deve ter no mínimo 20 letras")
 	private String synopsis;
 
+	@NotNull(message = "Campo não pode ser nulo")
 	private Long genreId;
 
 	private Set<ReviewDTO> reviews = new HashSet<>();

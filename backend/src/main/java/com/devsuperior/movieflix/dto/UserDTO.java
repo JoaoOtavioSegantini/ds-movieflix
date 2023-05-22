@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.devsuperior.movieflix.entities.User;
 
@@ -22,6 +23,7 @@ public class UserDTO implements Serializable {
 	@NotBlank(message = "Campo obrigatório!")
 	private String name;
 
+	@NotNull(message = "Campo não pode ser nulo")
 	private Set<RoleDTO> roles = new HashSet<>();
 
 	public UserDTO() {

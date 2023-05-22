@@ -30,6 +30,7 @@ public class SocialDTO implements Serializable {
 
     private Info info;
 
+    @NotNull(message = "Campo não pode ser nulo")
     private Set<RoleDTO> roles = new HashSet<>();
 
     public SocialDTO() {

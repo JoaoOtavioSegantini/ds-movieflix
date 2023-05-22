@@ -2,12 +2,15 @@ package com.devsuperior.movieflix.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
+
 import com.devsuperior.movieflix.entities.Role;
 
 public class RoleDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@NotNull(message = "Campo não pode ser nulo")
 	private Long id;
 	private String authority;
 
