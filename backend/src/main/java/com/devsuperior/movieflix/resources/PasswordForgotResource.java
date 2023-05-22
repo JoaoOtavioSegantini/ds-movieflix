@@ -50,7 +50,7 @@ public class PasswordForgotResource {
 	MailContentBuilder mailContentBuilder;
 
 	@PostMapping
-	public ResponseEntity<Void> send(@RequestBody @Valid EmailDTO dto) {
+	public ResponseEntity<Void> send(@Valid @RequestBody EmailDTO dto) {
 
 		User user = repository.findByEmail(dto.getTo());
 		if (user == null) {
@@ -72,7 +72,7 @@ public class PasswordForgotResource {
 	}
 
 	@PostMapping(value = "/reset")
-	public ResponseEntity<Void> reset(@RequestBody PasswordForgotDto dto) {
+	public ResponseEntity<Void> reset(@Valid @RequestBody PasswordForgotDto dto) {
 		PasswordResetToken resetToken = tokenRepository.findByToken(dto.getToken());
 		if (resetToken == null) {
 			throw new EmailException("Token não encontrado: " + dto.getToken());

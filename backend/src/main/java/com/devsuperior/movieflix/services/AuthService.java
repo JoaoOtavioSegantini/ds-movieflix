@@ -36,6 +36,7 @@ public class AuthService {
 
 	public void validateMemberOrAdmin() {
 		User user = authenticated();
+		
 		if (!user.hasHole("MEMBER") && !user.hasHole(ROLE_ADMIN)) {
 			throw new ForbiddenException(MSG);
 		}
@@ -43,6 +44,7 @@ public class AuthService {
 
 	public void validateAdmin() {
 		User user = authenticated();
+
 		if (!user.hasHole(ROLE_ADMIN)) {
 			throw new ForbiddenException(MSG);
 		}
